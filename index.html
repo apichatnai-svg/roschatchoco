@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ROSCHAT COCOA - Artisan craft cocoa from tree to chocolate. Small batch, sustainable, handcrafted premium cocoa products from our own farm.">
+<meta name="keywords" content="craft cocoa, bean to bar, single origin, farm to chocolate, sustainable agriculture, handcrafted, premium chocolate, artisan cocoa">
+<meta property="og:title" content="ROSCHAT·COCOA — From Tree to Chocolate">
+<meta property="og:description" content="Every cocoa bean carries years of care, patience, and craftsmanship.">
+<meta property="og:type" content="website">
+<title>ROSCHAT·COCOA — From Tree to Chocolate</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        cream: '#FDF8F3',
+        beige: '#F5E6D3',
+        cocoa: {
+          50:  '#FDF8F3',
+          100: '#F5E6D3',
+          200: '#E8C9A0',
+          300: '#C9A96E',
+          400: '#B8873A',
+          500: '#8B4513',
+          600: '#6B3A2A',
+          700: '#4A2218',
+          800: '#3B1F0E',
+          900: '#1C0F0A',
+        }
+      },
+      fontFamily: {
+        serif:   ['"Playfair Display"', 'serif'],
+        elegant: ['"Cormorant Garamond"', 'serif'],
+        sans:    ['Inter', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+
+<style>
+/* ── Reset & Base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --cocoa-dark:   #1C0F0A;
+  --cocoa-deep:   #3B1F0E;
+  --cocoa-medium: #6B3A2A;
+  --cocoa-warm:   #8B4513;
+  --cocoa-gold:   #C9A96E;
+  --cream:        #FDF8F3;
+  --beige:        #F5E6D3;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--cream);
+  color: var(--cocoa-dark);
+  transition: background-color 0.4s, color 0.4s;
+  overflow-x: hidden;
+}
+
+.dark body { background-color: var(--cocoa-dark); color: var(--cream); }
+
+/* ── Custom Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--cocoa-medium); border-radius: 3px; }
+.dark ::-webkit-scrollbar-track { background: var(--cocoa-dark); }
+
+/* ── Keyframes ────────────────────────────────────────────── */
+@keyframes fadeUp   { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+@keyframes floatY   { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+@keyframes rotateSpin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+@keyframes shimmer  { 0% { background-position:-400px 0; } 100% { background-position:400px 0; } }
+@keyframes scaleIn  { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+
+/* ── Hero Entrance ────────────────────────────────────────── */
+.h-anim-1 { opacity:0; animation: fadeUp 0.9s 0.3s both; }
+.h-anim-2 { opacity:0; animation: fadeUp 0.9s 0.55s both; }
+.h-anim-3 { opacity:0; animation: fadeUp 0.9s 0.75s both; }
+.h-anim-4 { opacity:0; animation: fadeUp 0.9s 0.95s both; }
+.h-anim-5 { opacity:0; animation: fadeIn 1s 1.6s both; }
+.animate-float { animation: floatY 3s ease-in-out infinite; }
+.animate-spin-slow { animation: rotateSpin 22s linear infinite; }
+
+/* ── Navbar ───────────────────────────────────────────────── */
+#navbar { transition: background 0.5s, backdrop-filter 0.5s; }
+#navbar.scrolled {
+  background: rgba(28,15,10,0.94) !important;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgba(201,169,110,0.15);
+}
+
+/* ── Mobile Menu ──────────────────────────────────────────── */
+#mobileMenu {
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+#mobileMenu.open { transform: translateX(0); }
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.btn-ghost {
+  display: inline-block;
+  padding: 0.875rem 2.5rem;
+  border: 1px solid rgba(253,248,243,0.7);
+  color: var(--cream);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s;
+}
+.btn-ghost:hover { background: var(--cream); color: var(--cocoa-dark); border-color: var(--cream); }
+
+.btn-solid {
+  display: inline-block;
+  padding: 0.875rem 2.5rem;
+  background: var(--cocoa-medium);
+  color: var(--cream);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid var(--cocoa-medium);
+  transition: all 0.3s;
+}
+.btn-solid:hover { background: transparent; color: var(--cocoa-medium); }
+.dark .btn-solid:hover { color: var(--cream); border-color: var(--cream); }
+
+/* ── Labels ───────────────────────────────────────────────── */
+.eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--cocoa-gold);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* ── Timeline ─────────────────────────────────────────────── */
+.tl-line {
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, transparent 0%, var(--cocoa-gold) 20%, var(--cocoa-gold) 80%, transparent 100%);
+  transform: translateX(-50%);
+}
+.tl-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--cocoa-gold);
+  border: 3px solid var(--cream);
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 2;
+}
+.dark .tl-dot { border-color: var(--cocoa-dark); }
+
+/* ── Gallery ──────────────────────────────────────────────── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1.2fr;
+  grid-template-rows: 260px 260px;
+  gap: 10px;
+}
+.gallery-grid .g1 { grid-row: 1 / 3; }
+.gallery-grid .g4 { grid-row: 1 / 3; }
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 220px 180px 220px;
+  }
+  .gallery-grid .g1 { grid-column: 1 / 3; grid-row: 1; }
+  .gallery-grid .g2 { grid-row: 2; }
+  .gallery-grid .g3 { grid-row: 2; }
+  .gallery-grid .g4 { grid-column: 1 / 3; grid-row: 3; }
+}
+
+/* ── Process ──────────────────────────────────────────────── */
+.process-wrap { overflow-x: auto; scrollbar-width: none; cursor: grab; }
+.process-wrap::-webkit-scrollbar { display: none; }
+.process-wrap:active { cursor: grabbing; }
+
+.process-track { display: flex; gap: 0; min-width: max-content; padding: 2rem 0 3rem; }
+
+.proc-step {
+  width: 210px; flex-shrink: 0;
+  text-align: center; padding: 0 1rem;
+  position: relative;
+}
+.proc-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 40px; right: 0; left: 50%;
+  width: 50%; height: 1px;
+  background: linear-gradient(to right, var(--cocoa-gold), rgba(201,169,110,0.2));
+}
+.proc-circle {
+  width: 80px; height: 80px; border-radius: 50%;
+  border: 1.5px solid var(--cocoa-gold);
+  margin: 0 auto 1.25rem;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%) contrast(1.05);
+  transition: filter 0.4s, border-color 0.3s, box-shadow 0.3s, transform 0.4s;
+}
+.proc-step:hover .proc-circle { filter: grayscale(0%); transform: scale(1.05); }
+
+.proc-step.key .proc-circle {
+  border-width: 3px;
+  border-color: var(--cocoa-gold);
+  box-shadow: 0 0 0 6px rgba(201,169,110,0.16);
+}
+.proc-key-tag {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cocoa-gold);
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+/* ── Product Cards ────────────────────────────────────────── */
+.prod-card { overflow: hidden; position: relative; }
+.prod-img { transition: transform 0.7s ease; }
+.prod-card:hover .prod-img { transform: scale(1.06); }
+.prod-overlay {
+  position: absolute; inset: 0;
+  background: rgba(28,15,10,0.55);
+  opacity: 0; transition: opacity 0.3s;
+  display: flex; align-items: center; justify-content: center;
+}
+.prod-card:hover .prod-overlay { opacity: 1; }
+
+/* ── Parallax ─────────────────────────────────────────────── */
+.parallax-bg {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+@media (max-width: 768px) { .parallax-bg { background-attachment: scroll; } }
+
+/* ── Testimonial ──────────────────────────────────────────── */
+.t-track { display: flex; transition: transform 0.55s cubic-bezier(0.4,0,0.2,1); }
+.t-card  { min-width: 100%; }
+
+/* ── Form ─────────────────────────────────────────────────── */
+.f-input {
+  display: block; width: 100%;
+  background: transparent;
+  border: none; border-bottom: 1px solid var(--cocoa-gold);
+  padding: 0.75rem 0;
+  color: inherit;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.f-input::placeholder { color: rgba(185,135,58,0.55); font-size: 0.85rem; }
+.f-input:focus { border-color: var(--cocoa-medium); }
+
+/* ── Grain Texture ────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9998; opacity: 0.5;
+}
+
+/* ── Overlay gradient ─────────────────────────────────────── */
+.img-fade { background: linear-gradient(to top, rgba(28,15,10,0.85) 0%, transparent 60%); }
+
+/* ── Stats ────────────────────────────────────────────────── */
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; font-weight: 700;
+  color: var(--cocoa-gold);
+  line-height: 1;
+}
+
+/* ── Back to top ──────────────────────────────────────────── */
+#btt {
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+#btt.show { opacity: 1; pointer-events: auto; }
+
+/* ── Section divider ──────────────────────────────────────── */
+.divider {
+  width: 40px; height: 1px;
+  background: var(--cocoa-gold);
+  margin: 1.25rem auto;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-10 py-5">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="#hero" class="font-serif text-cream text-xl tracking-[0.2em] font-semibold select-none">
+      ROSCHAT<span class="text-cocoa-300">·</span>COCOA
+    </a>
+
+    <!-- Desktop Links -->
+    <div class="hidden md:flex items-center gap-7">
+      <a href="#story"    class="text-cream/75 hover:text-cream text-[0.7rem] tracking-[0.2em] uppercase transition" data-i18n="nav-story">Our Story</a>
+      <a href="#farm"     class="text-cream/75 hover:text-cream text-[0.7rem] tracking-[0.2em] uppercase transition" data-i18n="nav-farm">Farm</a>
+      <a href="#process"  class="text-cream/75 hover:text-cream text-[0.7rem] tracking-[0.2em] uppercase transition" data-i18n="nav-process">Process</a>
+      <a href="#products" class="text-cream/75 hover:text-cream text-[0.7rem] tracking-[0.2em] uppercase transition" data-i18n="nav-products">Products</a>
+      <a href="#visit"    class="text-cream/75 hover:text-cream text-[0.7rem] tracking-[0.2em] uppercase transition" data-i18n="nav-visit">Visit</a>
+      <a href="#contact"  class="text-cream/75 hover:text-cream text-[0.7rem] tracking-[0.2em] uppercase transition" data-i18n="nav-contact">Contact</a>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-3">
+      <button id="langBtn" aria-label="Switch language" onclick="toggleLang()"
+        class="text-cream/70 hover:text-cream transition text-[0.65rem] tracking-[0.2em] font-medium border border-cream/25 hover:border-cream/60 px-2 py-1">
+        TH
+      </button>
+      <button id="themeBtn" aria-label="Toggle theme" class="text-cream/70 hover:text-cream transition p-1">
+        <svg id="iconSun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+        <svg id="iconMoon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </svg>
+      </button>
+      <button id="menuBtn" class="md:hidden text-cream p-1" aria-label="Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div id="mobileMenu" class="fixed top-0 right-0 h-full w-72 bg-cocoa-900 z-[60] flex flex-col p-8 shadow-2xl">
+  <button id="closeBtn" class="self-end text-cream mb-8" aria-label="Close">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+  <nav class="flex flex-col gap-7">
+    <a href="#story"    class="m-link text-cream font-serif text-xl tracking-wide" data-i18n="mob-story">Our Story</a>
+    <a href="#farm"     class="m-link text-cream font-serif text-xl tracking-wide" data-i18n="mob-farm">Farm Experience</a>
+    <a href="#process"  class="m-link text-cream font-serif text-xl tracking-wide" data-i18n="mob-process">The Process</a>
+    <a href="#products" class="m-link text-cream font-serif text-xl tracking-wide" data-i18n="mob-products">Products</a>
+    <a href="#visit"    class="m-link text-cream font-serif text-xl tracking-wide" data-i18n="mob-visit">Visit Us</a>
+    <a href="#contact"  class="m-link text-cream font-serif text-xl tracking-wide" data-i18n="mob-contact">Contact</a>
+  </nav>
+  <div class="mt-auto">
+    <p class="text-cocoa-500 text-[0.65rem] tracking-[0.3em] uppercase mb-3">Follow Us</p>
+    <div class="flex gap-5 text-sm text-cocoa-400">
+      <a href="https://www.facebook.com/share/1EU5DsLYPi/?mibextid=wwXIfr" target="_blank" class="hover:text-cream transition">Facebook</a>
+      <a href="https://www.instagram.com/Roschat.cocoa" target="_blank" class="hover:text-cream transition">Instagram</a>
+      <a href="https://line.me/ti/p/~2536808" target="_blank" class="hover:text-cream transition">LINE</a>
+    </div>
+  </div>
+</div>
+<div id="menuOverlay" class="fixed inset-0 bg-black/40 z-[59] hidden"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     §1 HERO
+═══════════════════════════════════════════════════════════ -->
+<section id="hero" class="relative h-screen min-h-[600px] overflow-hidden">
+
+  <!-- BG Image -->
+  <div class="absolute inset-0">
+    <img id="heroBg"
+      src="photo-Vdio/สวนโกโก้ยามเช้า แสงอาทิตย์ลอดผ่านต้นไม้.png"
+      alt="Cocoa plantation at golden hour"
+      class="w-full h-full object-cover"
+      style="transform:scale(1.12); transform-origin:center center;"
+      onerror="this.src='https://picsum.photos/1920/1080?grayscale&random=1'">
+    <!-- Gradient overlays -->
+    <div class="absolute inset-0" style="background: linear-gradient(160deg, rgba(28,15,10,0.72) 0%, rgba(28,15,10,0.45) 50%, rgba(28,15,10,0.82) 100%);"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-40" style="background: linear-gradient(to top, rgba(28,15,10,0.9), transparent);"></div>
+  </div>
+
+  <!-- Rotating Badge -->
+  <div class="absolute top-28 right-8 md:right-16 w-24 h-24 hidden lg:flex items-center justify-center">
+    <svg class="animate-spin-slow absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+      <defs><path id="circle" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"/></defs>
+      <text font-size="10.5" fill="rgba(201,169,110,0.7)" letter-spacing="3" font-family="Inter, sans-serif">
+        <textPath href="#circle">CRAFT COCOA · BEAN TO BAR · SINGLE ORIGIN ·</textPath>
+      </text>
+    </svg>
+    <span class="text-cocoa-300 text-2xl">✦</span>
+  </div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+    <span class="eyebrow h-anim-1" style="color:rgba(201,169,110,0.9);" data-i18n="hero-eyebrow">Artisan Craft Cocoa · Farm to Chocolate</span>
+
+    <h1 class="h-anim-2 font-serif text-cream leading-[1.08] font-light mb-6"
+        style="font-size: clamp(3rem, 8vw, 6.5rem);" data-i18n="hero-h1">
+      From Tree<br><em class="text-cocoa-300" style="font-style:italic;">to Chocolate</em>
+    </h1>
+
+    <p class="h-anim-3 text-cream/65 max-w-lg leading-relaxed mb-10"
+       style="font-size: clamp(0.95rem, 2vw, 1.15rem);" data-i18n="hero-sub">
+      Every cocoa bean carries years of care, patience, and craftsmanship.
+    </p>
+
+    <a href="#story" class="btn-ghost h-anim-4" data-i18n="hero-cta">Explore Our Story</a>
+
+    <!-- Scroll hint -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 h-anim-5">
+      <span class="text-cream/30 text-[0.6rem] tracking-[0.3em] uppercase" data-i18n="hero-scroll">Scroll</span>
+      <div class="w-px h-10 animate-float" style="background: linear-gradient(to bottom, rgba(201,169,110,0.6), transparent);"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     §2 OUR STORY — TIMELINE
+═══════════════════════════════════════════════════════════ -->
+<section id="story" class="py-24 md:py-36 bg-cocoa-50 dark:bg-cocoa-900">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- Header -->
+    <div class="text-center mb-24" data-aos="fade-up">
+      <span class="eyebrow" data-i18n="story-eyebrow">Our Journey</span>
+      <h2 class="font-serif text-4xl md:text-5xl text-cocoa-800 dark:text-cream font-light leading-tight" data-i18n="story-h2">
+        The Story Behind<br><em>Every Bean</em>
+      </h2>
+      <div class="divider"></div>
+      <p class="text-cocoa-500 dark:text-cocoa-300 max-w-2xl mx-auto text-sm leading-relaxed" data-i18n="story-sub">
+        The journey from a cocoa tree to your chocolate takes years of quiet dedication. It is a labor of love
+        that few truly understand — a process where patience is not a virtue but a necessity.
+      </p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative">
+      <div class="tl-line hidden md:block"></div>
+
+      <!-- ── Step 1 ── -->
+      <div class="md:grid md:grid-cols-2 md:gap-16 md:items-center mb-20 md:mb-28">
+        <div class="md:text-right pr-0 md:pr-8" data-aos="fade-right">
+          <div class="tl-dot hidden md:block" style="top:auto; position:static; margin-left:auto; margin-bottom:1rem; margin-right:-calc(2rem + 6px); display:none;"></div>
+          <span class="text-5xl block mb-4">🌱</span>
+          <h3 class="font-serif text-2xl text-cocoa-700 dark:text-cocoa-200 mb-3" data-i18n="s1-title">Planting Cocoa Trees</h3>
+          <p class="text-cocoa-500 dark:text-cocoa-400 text-sm leading-7">
+            Every journey begins with a single seed pressed into living soil. We select the finest
+            Theobroma cacao varieties and plant them in the dappled shade of native trees. This is where
+            patience first becomes a way of life.
+          </p>
+          <span class="inline-block mt-4 text-[0.65rem] tracking-[0.25em] uppercase text-cocoa-300 border border-cocoa-200 dark:border-cocoa-700 px-3 py-1" data-i18n="s1-year">Year 0</span>
+        </div>
+        <!-- Center dot -->
+        <div class="hidden md:block absolute left-1/2 -translate-x-1/2" style="top:calc(0px + 1.5rem);">
+          <div class="w-3 h-3 rounded-full bg-cocoa-300 border-4 border-cocoa-50 dark:border-cocoa-900"></div>
+        </div>
+        <div class="mt-8 md:mt-0" data-aos="fade-left">
+          <div class="relative h-64 md:h-80 overflow-hidden">
+            <img src="photo-Vdio/S__94339079_0.jpg"
+                 alt="Planting cocoa seeds" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                 onerror="this.src='https://picsum.photos/800/600?random=2'">
+            <div class="absolute inset-0 img-fade"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Step 2 ── -->
+      <div class="md:grid md:grid-cols-2 md:gap-16 md:items-center mb-20 md:mb-28">
+        <div class="md:order-2 pl-0 md:pl-8" data-aos="fade-left">
+          <span class="text-5xl block mb-4">🌳</span>
+          <h3 class="font-serif text-2xl text-cocoa-700 dark:text-cocoa-200 mb-3" data-i18n="s2-title">Growing for Years</h3>
+          <p class="text-cocoa-500 dark:text-cocoa-400 text-sm leading-7">
+            Cacao trees require 3–5 years before yielding their first fruit. During this time we tend the soil,
+            cultivate biodiversity, and simply wait. In an age of instant gratification, growing cacao is a
+            radical act of patience.
+          </p>
+          <span class="inline-block mt-4 text-[0.65rem] tracking-[0.25em] uppercase text-cocoa-300 border border-cocoa-200 dark:border-cocoa-700 px-3 py-1" data-i18n="s2-year">Years 1–4</span>
+        </div>
+        <div class="mt-8 md:mt-0 md:order-1" data-aos="fade-right">
+          <div class="relative h-64 md:h-80 overflow-hidden">
+            <img src="photo-Vdio/02_ผลโกโก้.jpg"
+                 alt="Cacao trees growing" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                 onerror="this.src='https://picsum.photos/800/600?random=3'">
+            <div class="absolute inset-0 img-fade"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Step 3 ── -->
+      <div class="md:grid md:grid-cols-2 md:gap-16 md:items-center mb-20 md:mb-28">
+        <div class="md:text-right pr-0 md:pr-8" data-aos="fade-right">
+          <span class="text-5xl block mb-4">🍈</span>
+          <h3 class="font-serif text-2xl text-cocoa-700 dark:text-cocoa-200 mb-3" data-i18n="s3-title">Harvesting Pods by Hand</h3>
+          <p class="text-cocoa-500 dark:text-cocoa-400 text-sm leading-7">
+            When pods blush golden-orange, we harvest each one by hand with a machete — carefully, so as not
+            to damage the flower cushion that will bear fruit next season. Each pod is inspected individually.
+            Only the perfectly ripe are chosen.
+          </p>
+          <span class="inline-block mt-4 text-[0.65rem] tracking-[0.25em] uppercase text-cocoa-300 border border-cocoa-200 dark:border-cocoa-700 px-3 py-1" data-i18n="s3-year">Harvest Season</span>
+        </div>
+        <div class="mt-8 md:mt-0" data-aos="fade-left">
+          <div class="relative h-64 md:h-80 overflow-hidden">
+            <img src="photo-Vdio/01_เก็บเกี่ยวด้วยมือ.png"
+                 alt="Harvesting cocoa pods" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                 onerror="this.src='https://picsum.photos/800/600?random=4'">
+            <div class="absolute inset-0 img-fade"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Step 4 ── -->
+      <div class="md:grid md:grid-cols-2 md:gap-16 md:items-center mb-20 md:mb-28">
+        <div class="md:order-2 pl-0 md:pl-8" data-aos="fade-left">
+          <span class="text-5xl block mb-4">🧺</span>
+          <h3 class="font-serif text-2xl text-cocoa-700 dark:text-cocoa-200 mb-3" data-i18n="s4-title">Natural Fermentation</h3>
+          <p class="text-cocoa-500 dark:text-cocoa-400 text-sm leading-7">
+            Freshly extracted beans are piled into wooden fermentation boxes and covered with banana leaves.
+            Over 5–7 days, wild yeasts and bacteria unlock flavor precursors that no amount of processing can
+            replicate. This step makes or breaks a chocolate.
+          </p>
+          <span class="inline-block mt-4 text-[0.65rem] tracking-[0.25em] uppercase text-cocoa-300 border border-cocoa-200 dark:border-cocoa-700 px-3 py-1" data-i18n="s4-year">5–7 Days</span>
+        </div>
+        <div class="mt-8 md:mt-0 md:order-1" data-aos="fade-right">
+          <div class="relative h-64 md:h-80 overflow-hidden">
+            <img src="photo-Vdio/03_หมัก.jpg"
+                 alt="Cocoa fermentation" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                 onerror="this.src='https://picsum.photos/800/600?random=5'">
+            <div class="absolute inset-0 img-fade"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Step 5 ── -->
+      <div class="md:grid md:grid-cols-2 md:gap-16 md:items-center mb-20 md:mb-28">
+        <div class="md:text-right pr-0 md:pr-8" data-aos="fade-right">
+          <span class="text-5xl block mb-4">☀️</span>
+          <h3 class="font-serif text-2xl text-cocoa-700 dark:text-cocoa-200 mb-3" data-i18n="s5-title">Sun Drying</h3>
+          <p class="text-cocoa-500 dark:text-cocoa-400 text-sm leading-7">
+            Beans are spread on raised bamboo drying tables under the open sky. We rake them slowly, morning
+            and evening, for up to two weeks. The gentle tropical sun does what no machine can — it draws
+            moisture out while preserving delicate aromatics.
+          </p>
+          <span class="inline-block mt-4 text-[0.65rem] tracking-[0.25em] uppercase text-cocoa-300 border border-cocoa-200 dark:border-cocoa-700 px-3 py-1" data-i18n="s5-year">10–14 Days</span>
+        </div>
+        <div class="mt-8 md:mt-0" data-aos="fade-left">
+          <div class="relative h-64 md:h-80 overflow-hidden">
+            <img src="photo-Vdio/04_ตากเมล็ดที่หมักแล้ว.jpg"
+                 alt="Sun drying cocoa" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                 onerror="this.src='https://picsum.photos/800/600?random=6'">
+            <div class="absolute inset-0 img-fade"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Step 6 ── -->
+      <div class="md:grid md:grid-cols-2 md:gap-16 md:items-center mb-20 md:mb-28">
+        <div class="md:order-2 pl-0 md:pl-8" data-aos="fade-left">
+          <span class="text-5xl block mb-4">🔥</span>
+          <h3 class="font-serif text-2xl text-cocoa-700 dark:text-cocoa-200 mb-3" data-i18n="s6-title">Small-Batch Roasting</h3>
+          <p class="text-cocoa-500 dark:text-cocoa-400 text-sm leading-7">
+            We roast in small batches, adjusting temperature and time by intuition as much as by instrument.
+            The scent tells us when to stop. This is where science meets sensory craft — and where our
+            chocolate's character is born.
+          </p>
+          <span class="inline-block mt-4 text-[0.65rem] tracking-[0.25em] uppercase text-cocoa-300 border border-cocoa-200 dark:border-cocoa-700 px-3 py-1" data-i18n="s6-year">Small Batch</span>
+        </div>
+        <div class="mt-8 md:mt-0 md:order-1" data-aos="fade-right">
+          <div class="relative h-64 md:h-80 overflow-hidden">
+            <img src="photo-Vdio/05_อบคั่วตามโปรไฟล์.jpg"
+                 alt="Roasting cocoa beans" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                 onerror="this.src='https://picsum.photos/800/600?random=7'">
+            <div class="absolute inset-0 img-fade"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Step 7 ── -->
+      <div class="md:grid md:grid-cols-2 md:gap-16 md:items-center mb-20 md:mb-28">
+        <div class="md:text-right pr-0 md:pr-8" data-aos="fade-right">
+          <span class="text-5xl block mb-4">⚙️</span>
+          <h3 class="font-serif text-2xl text-cocoa-700 dark:text-cocoa-200 mb-3" data-i18n="s7-title">Grinding</h3>
+          <p class="text-cocoa-500 dark:text-cocoa-400 text-sm leading-7">
+            Roasted nibs are stone-ground for 48–72 hours until they transform into silken chocolate liquor.
+            We grind longer than most because we believe texture is inseparable from taste. Rushing here
+            would betray everything that came before.
+          </p>
+          <span class="inline-block mt-4 text-[0.65rem] tracking-[0.25em] uppercase text-cocoa-300 border border-cocoa-200 dark:border-cocoa-700 px-3 py-1" data-i18n="s7-year">48–72 Hours</span>
+        </div>
+        <div class="mt-8 md:mt-0" data-aos="fade-left">
+          <div class="relative h-64 md:h-80 overflow-hidden">
+            <img src="photo-Vdio/08_โม่โกโก้.jpg"
+                 alt="Grinding chocolate" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                 onerror="this.src='https://picsum.photos/800/600?random=8'">
+            <div class="absolute inset-0 img-fade"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Step 8 ── -->
+      <div class="md:grid md:grid-cols-2 md:gap-16 md:items-center">
+        <div class="md:order-2 pl-0 md:pl-8" data-aos="fade-left">
+          <span class="text-5xl block mb-4">🍫</span>
+          <h3 class="font-serif text-2xl text-cocoa-700 dark:text-cocoa-200 mb-3" data-i18n="s8-title">Craft Chocolate</h3>
+          <p class="text-cocoa-500 dark:text-cocoa-400 text-sm leading-7">
+            Finally, the chocolate is tempered by hand, poured into molds, cooled slowly, and wrapped with
+            care. Each bar carries the story of every step before it — the years of waiting, the daily labor,
+            the love of the land. This is ROSCHAT·COCOA.
+          </p>
+          <span class="inline-block mt-4 text-[0.65rem] tracking-[0.25em] uppercase text-cocoa-300 border border-cocoa-200 dark:border-cocoa-700 px-3 py-1" data-i18n="s8-year">Handcrafted</span>
+        </div>
+        <div class="mt-8 md:mt-0 md:order-1" data-aos="fade-right">
+          <div class="relative h-64 md:h-80 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?w=800&q=80&auto=format&fit=crop"
+                 alt="Finished craft chocolate" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                 onerror="this.src='https://picsum.photos/800/600?random=9'">
+            <div class="absolute inset-0 img-fade"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /Timeline -->
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     §3 FARM EXPERIENCE
+═══════════════════════════════════════════════════════════ -->
+<section id="farm" class="py-24 md:py-36 bg-cocoa-900">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="eyebrow" style="color:rgba(201,169,110,0.8);" data-i18n="farm-eyebrow">The Farm</span>
+      <h2 class="font-serif text-4xl md:text-5xl text-cream font-light leading-tight" data-i18n="farm-h2">
+        More Than a Cocoa Farm<br><em class="text-cocoa-300">This Is What We Believe</em>
+      </h2>
+      <div class="divider"></div>
+      <p class="text-cocoa-400 max-w-xl mx-auto text-sm leading-relaxed" data-i18n="farm-intro">
+        We believe great chocolate doesn't start in a factory.<br>
+        It begins the day a cocoa tree bears its first fruit.<br>
+        Every step after that is a decision that shapes the final taste.
+      </p>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery-grid mb-16">
+
+      <div class="g1 overflow-hidden relative group" data-aos="fade-right">
+        <img src="photo-Vdio/สวนโกโก้ยามเช้า แสงอาทิตย์ลอดผ่านต้นไม้.png"
+             alt="Sustainable farming" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+             onerror="this.src='https://picsum.photos/700/900?random=10'">
+        <div class="absolute inset-0 img-fade"></div>
+        <div class="absolute bottom-6 left-6 right-6">
+          <p class="text-cream/40 text-[0.6rem] tracking-[0.3em] uppercase mb-1">01</p>
+          <h3 class="font-serif text-cream text-lg" data-i18n="g1-title">Grown With Respect for Nature</h3>
+          <p class="text-cream/60 text-xs leading-snug mt-1" data-i18n="g1-desc">We let cocoa trees grow beneath the forest canopy, preserving nature's balance and the quality of every pod.</p>
+        </div>
+      </div>
+
+      <div class="g2 overflow-hidden relative group" data-aos="fade-up" data-aos-delay="80">
+        <img src="photo-Vdio/01_เก็บเกี่ยวด้วยมือ.png"
+             alt="Hand harvesting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+             onerror="this.src='https://picsum.photos/600/400?random=11'">
+        <div class="absolute inset-0 img-fade"></div>
+        <div class="absolute bottom-4 left-4 right-4">
+          <p class="text-cream/40 text-[0.6rem] tracking-[0.3em] uppercase mb-1">02</p>
+          <h3 class="font-serif text-cream text-base" data-i18n="g2-title">Harvested Only at Peak Ripeness</h3>
+          <p class="text-cream/60 text-xs leading-snug mt-1" data-i18n="g2-desc">Every pod is hand-picked, chosen only when it reaches its perfect moment.</p>
+        </div>
+      </div>
+
+      <div class="g3 overflow-hidden relative group" data-aos="fade-up" data-aos-delay="160">
+        <img src="photo-Vdio/06_หลังกระเทาะเปลือก.jpg"
+             alt="Natural fermentation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+             onerror="this.src='https://picsum.photos/600/400?random=12'">
+        <div class="absolute inset-0 img-fade"></div>
+        <div class="absolute bottom-4 left-4 right-4">
+          <p class="text-cream/40 text-[0.6rem] tracking-[0.3em] uppercase mb-1">03</p>
+          <h3 class="font-serif text-cream text-base" data-i18n="g3-title">Time Is the Key Ingredient</h3>
+          <p class="text-cream/60 text-xs leading-snug mt-1" data-i18n="g3-desc">We let nature build the flavor, never rushing the process.</p>
+        </div>
+      </div>
+
+      <div class="g4 overflow-hidden relative group" data-aos="fade-left">
+        <img src="photo-Vdio/S__94339080_0.jpg"
+             alt="Small batch production" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+             onerror="this.src='https://picsum.photos/700/900?random=13'">
+        <div class="absolute inset-0 img-fade"></div>
+        <div class="absolute bottom-6 left-6 right-6">
+          <p class="text-cream/40 text-[0.6rem] tracking-[0.3em] uppercase mb-1">04</p>
+          <h3 class="font-serif text-cream text-lg" data-i18n="g4-title">Never Rushed</h3>
+          <p class="text-cream/60 text-xs leading-snug mt-1" data-i18n="g4-desc">Because we believe quality can't be sped up by quantity.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Values -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5" data-aos="fade-up">
+      <div class="border border-cocoa-700 p-6 text-center hover:border-cocoa-400 transition group">
+        <p class="text-3xl mb-3">🌿</p>
+        <h4 class="font-serif text-cream text-sm mb-2 group-hover:text-cocoa-300 transition" data-i18n="val1-title">No Chemicals</h4>
+        <p class="text-cocoa-500 text-xs leading-relaxed" data-i18n="val1-desc">100% organic, zero pesticides or synthetic fertilizers</p>
+      </div>
+      <div class="border border-cocoa-700 p-6 text-center hover:border-cocoa-400 transition group">
+        <p class="text-3xl mb-3">💧</p>
+        <h4 class="font-serif text-cream text-sm mb-2 group-hover:text-cocoa-300 transition" data-i18n="val2-title">Water Conscious</h4>
+        <p class="text-cocoa-500 text-xs leading-relaxed" data-i18n="val2-desc">Rainwater harvesting and minimal water footprint</p>
+      </div>
+      <div class="border border-cocoa-700 p-6 text-center hover:border-cocoa-400 transition group">
+        <p class="text-3xl mb-3">🌳</p>
+        <h4 class="font-serif text-cream text-sm mb-2 group-hover:text-cocoa-300 transition" data-i18n="val3-title">Shade Grown</h4>
+        <p class="text-cocoa-500 text-xs leading-relaxed" data-i18n="val3-desc">Under native forest canopy, preserving biodiversity</p>
+      </div>
+      <div class="border border-cocoa-700 p-6 text-center hover:border-cocoa-400 transition group">
+        <p class="text-3xl mb-3">👐</p>
+        <h4 class="font-serif text-cream text-sm mb-2 group-hover:text-cocoa-300 transition" data-i18n="val4-title">Trusted Origin</h4>
+        <p class="text-cocoa-500 text-xs leading-relaxed" data-i18n="val4-desc">Whether grown on our farm or sourced from trusted partner growers, every bean meets the same standard and stays fully traceable.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     §4 THE PROCESS — Horizontal Timeline
+═══════════════════════════════════════════════════════════ -->
+<section id="process" class="py-24 md:py-36 bg-beige dark:bg-cocoa-800 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12" data-aos="fade-up">
+      <span class="eyebrow" data-i18n="proc-eyebrow">Craft &amp; Technique</span>
+      <h2 class="font-serif text-4xl md:text-5xl text-cocoa-800 dark:text-cream font-light leading-tight" data-i18n="proc-h2">
+        The Art of Making<br><em>Chocolate</em>
+      </h2>
+      <div class="divider"></div>
+    </div>
+  </div>
+
+  <!-- Horizontal scroll -->
+  <div class="process-wrap px-6" id="procWrap">
+    <div class="process-track" id="procTrack" style="padding-left:max(1.5rem, calc((100vw - 1280px)/2 + 1.5rem)); padding-right:3rem;">
+
+      <div class="proc-step">
+        <div class="proc-circle" style="background-image:url('photo-Vdio/สวนโกโก้ยามเช้า แสงอาทิตย์ลอดผ่านต้นไม้.png')"></div>
+        <p class="text-[0.65rem] tracking-[0.2em] uppercase text-cocoa-300 mb-2" data-i18n="p1-step">Step 01</p>
+        <h4 class="font-serif text-cocoa-700 dark:text-cocoa-200 text-sm font-semibold mb-2" data-i18n="p1-title">Growing</h4>
+        <p class="text-cocoa-500 dark:text-cocoa-400 text-xs leading-relaxed" data-i18n="p1-desc">3–5 years, grown in rich tropical soil</p>
+      </div>
+
+      <div class="proc-step">
+        <div class="proc-circle" style="background-image:url('photo-Vdio/01_เก็บเกี่ยวด้วยมือ.png')"></div>
+        <p class="text-[0.65rem] tracking-[0.2em] uppercase text-cocoa-300 mb-2" data-i18n="p2-step">Step 02</p>
+        <h4 class="font-serif text-cocoa-700 dark:text-cocoa-200 text-sm font-semibold mb-2" data-i18n="p2-title">Harvesting</h4>
+        <p class="text-cocoa-500 dark:text-cocoa-400 text-xs leading-relaxed" data-i18n="p2-desc">Only ripe pods, hand-cut one by one</p>
+      </div>
+
+      <div class="proc-step key">
+        <div class="proc-circle" style="background-image:url('photo-Vdio/03_หมัก.jpg')"></div>
+        <p class="proc-key-tag" data-i18n="tag-key">Key Step</p>
+        <p class="text-[0.65rem] tracking-[0.2em] uppercase text-cocoa-300 mb-2" data-i18n="p3-step">Step 03</p>
+        <h4 class="font-serif text-cocoa-400 dark:text-cocoa-300 text-base font-bold mb-2" data-i18n="p3-title">Fermenting</h4>
+        <p class="text-cocoa-500 dark:text-cocoa-400 text-xs leading-relaxed" data-i18n="p3-desc">5–7 days, in wooden boxes under banana leaves</p>
+      </div>
+
+      <div class="proc-step key">
+        <div class="proc-circle" style="background-image:url('photo-Vdio/04_ตากเมล็ดที่หมักแล้ว.jpg')"></div>
+        <p class="proc-key-tag" data-i18n="tag-key">Key Step</p>
+        <p class="text-[0.65rem] tracking-[0.2em] uppercase text-cocoa-300 mb-2" data-i18n="p4-step">Step 04</p>
+        <h4 class="font-serif text-cocoa-400 dark:text-cocoa-300 text-base font-bold mb-2" data-i18n="p4-title">Drying</h4>
+        <p class="text-cocoa-500 dark:text-cocoa-400 text-xs leading-relaxed" data-i18n="p4-desc">10–14 days, sun-dried naturally on raised beds</p>
+      </div>
+
+      <div class="proc-step key">
+        <div class="proc-circle" style="background-image:url('photo-Vdio/05_อบคั่วตามโปรไฟล์.jpg')"></div>
+        <p class="proc-key-tag" data-i18n="tag-key">Key Step</p>
+        <p class="text-[0.65rem] tracking-[0.2em] uppercase text-cocoa-300 mb-2" data-i18n="p5-step">Step 05</p>
+        <h4 class="font-serif text-cocoa-400 dark:text-cocoa-300 text-base font-bold mb-2" data-i18n="p5-title">Roast the Beans</h4>
+        <p class="text-cocoa-500 dark:text-cocoa-400 text-xs leading-relaxed" data-i18n="p5-desc">Small batches, guided by scent and touch</p>
+      </div>
+
+      <div class="proc-step key">
+        <div class="proc-circle" style="background-image:url('photo-Vdio/08_โม่โกโก้.jpg')"></div>
+        <p class="proc-key-tag" data-i18n="tag-key">Key Step</p>
+        <p class="text-[0.65rem] tracking-[0.2em] uppercase text-cocoa-300 mb-2" data-i18n="p6-step">Step 06</p>
+        <h4 class="font-serif text-cocoa-400 dark:text-cocoa-300 text-base font-bold mb-2" data-i18n="p6-title">Grinding</h4>
+        <p class="text-cocoa-500 dark:text-cocoa-400 text-xs leading-relaxed" data-i18n="p6-desc">Stone-ground 48–72 hours to silky smoothness</p>
+      </div>
+
+      <div class="proc-step" style="--last:true;">
+        <div class="proc-circle" style="background-image:url('photo-Vdio/09_ช็อกโกแลต.jpg'); border-color:var(--cocoa-medium);"></div>
+        <p class="text-[0.65rem] tracking-[0.2em] uppercase text-cocoa-300 mb-2" data-i18n="p7-step">Step 07</p>
+        <h4 class="font-serif text-cocoa-700 dark:text-cocoa-200 text-sm font-semibold mb-2" data-i18n="p7-title">Chocolate</h4>
+        <p class="text-cocoa-500 dark:text-cocoa-400 text-xs leading-relaxed" data-i18n="p7-desc">Hand-tempered, molded, and wrapped</p>
+      </div>
+
+    </div>
+  </div>
+  <p class="text-center text-cocoa-400 dark:text-cocoa-500 text-[0.65rem] tracking-[0.25em] uppercase mt-2" data-i18n="proc-hint">
+    ← Drag or scroll to explore →
+  </p>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     §5 PRODUCTS
+═══════════════════════════════════════════════════════════ -->
+<section id="products" class="py-24 md:py-36 bg-cocoa-50 dark:bg-cocoa-900">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="eyebrow" data-i18n="prod-eyebrow">Our Collection</span>
+      <h2 class="font-serif text-4xl md:text-5xl text-cocoa-800 dark:text-cream font-light leading-tight" data-i18n="prod-h2">
+        Crafted with<br><em class="text-cocoa-500 dark:text-cocoa-300">Pure Intention</em>
+      </h2>
+      <div class="divider"></div>
+      <p class="text-cocoa-500 dark:text-cocoa-400 max-w-xl mx-auto text-sm leading-relaxed" data-i18n="prod-sub">
+        From raw single-origin beans to refined handmade chocolate — every product tells the full story of our farm.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Card 1 -->
+      <div class="prod-card bg-white dark:bg-cocoa-800 group cursor-pointer" data-aos="fade-up" data-aos-delay="0" onclick="openModal('beans')" role="button" tabindex="0">
+        <div class="relative h-72 overflow-hidden">
+          <img src="photo-Vdio/04_ตากเมล็ดที่หมักแล้ว.jpg"
+               alt="Raw Cocoa Beans" class="prod-img w-full h-full object-cover"
+               onerror="this.src='https://picsum.photos/500/500?random=14'">
+          <div class="prod-overlay">
+            <a href="#contact" class="text-cream border border-cream px-5 py-2 text-[0.65rem] tracking-[0.2em] uppercase hover:bg-cream hover:text-cocoa-900 transition">Inquire</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <p class="text-[0.6rem] tracking-[0.25em] uppercase text-cocoa-300 mb-1" data-i18n="c1-tag">Single Origin</p>
+          <h3 class="font-serif text-cocoa-800 dark:text-cream text-xl mb-2" data-i18n="c1-name">Raw Cocoa Beans</h3>
+          <p class="text-cocoa-400 dark:text-cocoa-400 text-xs leading-relaxed mb-4" data-i18n="c1-desc">
+            Fermented &amp; sun-dried beans direct from our trees. Ideal for home roasters.
+          </p>
+          <div class="flex items-end justify-between">
+            <p class="font-serif text-cocoa-600 dark:text-cocoa-300 text-2xl">฿200
+              <span class="text-xs font-sans text-cocoa-400">/ 100g</span>
+            </p>
+            <a href="#contact" class="text-[0.6rem] tracking-[0.2em] uppercase text-cocoa-400 hover:text-cocoa-600 transition border-b border-cocoa-200">Order →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="prod-card bg-white dark:bg-cocoa-800 group cursor-pointer" data-aos="fade-up" data-aos-delay="100" onclick="openModal('nibs')" role="button" tabindex="0">
+        <div class="relative h-72 overflow-hidden">
+          <img src="photo-Vdio/07_Cocoa Nibs.jpg"
+               alt="Cocoa Nibs" class="prod-img w-full h-full object-cover"
+               onerror="this.src='https://picsum.photos/500/500?random=15'">
+          <div class="absolute top-4 right-4 bg-cocoa-600 text-cream text-[0.6rem] px-3 py-1 tracking-[0.2em] uppercase" data-i18n="c2-badge">Popular</div>
+          <div class="prod-overlay">
+            <a href="#contact" class="text-cream border border-cream px-5 py-2 text-[0.65rem] tracking-[0.2em] uppercase hover:bg-cream hover:text-cocoa-900 transition">Inquire</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <p class="text-[0.6rem] tracking-[0.25em] uppercase text-cocoa-300 mb-1" data-i18n="c2-tag">Roasted</p>
+          <h3 class="font-serif text-cocoa-800 dark:text-cream text-xl mb-2" data-i18n="c2-name">Cocoa Nibs</h3>
+          <p class="text-cocoa-400 dark:text-cocoa-400 text-xs leading-relaxed mb-4" data-i18n="c2-desc">
+            Crunchy roasted cocoa pieces rich in antioxidants — great for baking and smoothies.
+          </p>
+          <div class="flex items-end justify-between">
+            <p class="font-serif text-cocoa-600 dark:text-cocoa-300 text-2xl">฿260
+              <span class="text-xs font-sans text-cocoa-400">/ 100g</span>
+            </p>
+            <a href="#contact" class="text-[0.6rem] tracking-[0.2em] uppercase text-cocoa-400 hover:text-cocoa-600 transition border-b border-cocoa-200">Order →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="prod-card bg-white dark:bg-cocoa-800 group cursor-pointer" data-aos="fade-up" data-aos-delay="200" onclick="openModal('bar')" role="button" tabindex="0">
+        <div class="relative h-72 overflow-hidden">
+          <img src="photo-Vdio/09_ช็อกโกแลต.jpg"
+               alt="Craft Chocolate Bar" class="prod-img w-full h-full object-cover"
+               onerror="this.src='https://picsum.photos/500/500?random=16'">
+          <div class="absolute top-4 right-4 bg-cocoa-300 text-cocoa-900 text-[0.6rem] px-3 py-1 tracking-[0.2em] uppercase" data-i18n="c3-badge">Signature</div>
+          <div class="prod-overlay">
+            <a href="#contact" class="text-cream border border-cream px-5 py-2 text-[0.65rem] tracking-[0.2em] uppercase hover:bg-cream hover:text-cocoa-900 transition">Inquire</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <p class="text-[0.6rem] tracking-[0.25em] uppercase text-cocoa-300 mb-1" data-i18n="c3-tag">Bean to Bar</p>
+          <h3 class="font-serif text-cocoa-800 dark:text-cream text-xl mb-2" data-i18n="c3-name">Craft Chocolate Bar</h3>
+          <p class="text-cocoa-400 dark:text-cocoa-400 text-xs leading-relaxed mb-4" data-i18n="c3-desc">
+            72% dark chocolate made entirely from our farm. Two ingredients, infinite craft.
+          </p>
+          <div class="flex items-end justify-between">
+            <p class="font-serif text-cocoa-600 dark:text-cocoa-300 text-2xl">฿390
+              <span class="text-xs font-sans text-cocoa-400">/ 50g</span>
+            </p>
+            <a href="#contact" class="text-[0.6rem] tracking-[0.2em] uppercase text-cocoa-400 hover:text-cocoa-600 transition border-b border-cocoa-200">Order →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="prod-card bg-white dark:bg-cocoa-800 group cursor-pointer" data-aos="fade-up" data-aos-delay="300" onclick="openModal('mass')" role="button" tabindex="0">
+        <div class="relative h-72 overflow-hidden">
+          <img src="photo-Vdio/10_Cocoa mass.jpg"
+               alt="Cocoa Mass" class="prod-img w-full h-full object-cover"
+               onerror="this.src='https://picsum.photos/500/500?random=17'">
+          <div class="prod-overlay">
+            <a href="#contact" class="text-cream border border-cream px-5 py-2 text-[0.65rem] tracking-[0.2em] uppercase hover:bg-cream hover:text-cocoa-900 transition">Inquire</a>
+          </div>
+        </div>
+        <div class="p-6">
+          <p class="text-[0.6rem] tracking-[0.25em] uppercase text-cocoa-300 mb-1" data-i18n="c4-tag">Pure Cocoa</p>
+          <h3 class="font-serif text-cocoa-800 dark:text-cream text-xl mb-2" data-i18n="c4-name">Cocoa Mass</h3>
+          <p class="text-cocoa-400 dark:text-cocoa-400 text-xs leading-relaxed mb-4" data-i18n="c4-desc">
+            Pure stone-ground cocoa liquor from our farm — no additives, 100% cacao.
+          </p>
+          <div class="flex items-end justify-between">
+            <p class="font-serif text-cocoa-600 dark:text-cocoa-300 text-2xl">฿190
+              <span class="text-xs font-sans text-cocoa-400">/ 100g</span>
+            </p>
+            <a href="#contact" class="text-[0.6rem] tracking-[0.2em] uppercase text-cocoa-400 hover:text-cocoa-600 transition border-b border-cocoa-200">Order →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     §6 WHY ROSCHAT — Parallax Stats
+═══════════════════════════════════════════════════════════ -->
+<section class="relative py-32 md:py-40 overflow-hidden">
+  <div class="parallax-bg absolute inset-0"
+       style="background-image:url('photo-Vdio/S__94339080_0.jpg');"
+       onerror="">
+    <div class="absolute inset-0" style="background:rgba(28,15,10,0.82);"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6">
+
+    <div class="text-center mb-20" data-aos="fade-up">
+      <span class="eyebrow" style="color:rgba(201,169,110,0.8);" data-i18n="why-eyebrow">Why Choose Us</span>
+      <h2 class="font-serif text-4xl md:text-5xl text-cream font-light leading-tight" data-i18n="why-h2">
+        Why ROSCHAT<br><em class="text-cocoa-300">Cocoa</em>
+      </h2>
+      <div class="divider"></div>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-20 text-center" data-aos="fade-up" data-aos-delay="150" id="statsSection">
+      <div>
+        <div class="stat-num" id="stat1" data-target="3">0</div>
+        <p class="text-cream/50 text-[0.65rem] tracking-[0.2em] uppercase mt-2 leading-relaxed" data-i18n="stat1-lbl">Years<br>Growing</p>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <p class="text-cream/50 text-[0.65rem] tracking-[0.2em] uppercase mt-2 leading-relaxed" data-i18n="stat2-lbl">Farm<br>Origin</p>
+      </div>
+      <div>
+        <div class="stat-num" id="stat2" data-target="2">0</div>
+        <p class="text-cream/50 text-[0.65rem] tracking-[0.2em] uppercase mt-2 leading-relaxed" data-i18n="stat3-lbl">Ingredients<br>Only</p>
+      </div>
+      <div>
+        <div class="stat-num">0</div>
+        <p class="text-cream/50 text-[0.65rem] tracking-[0.2em] uppercase mt-2 leading-relaxed" data-i18n="stat4-lbl">Additives<br>Added</p>
+      </div>
+    </div>
+
+    <!-- Pillars -->
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="border border-cream/10 p-10 text-center hover:border-cocoa-400/40 transition duration-300" data-aos="fade-up" data-aos-delay="0">
+        <h3 class="font-serif text-cream text-xl mb-3" data-i18n="pil1-title">Small Batch Crafted</h3>
+        <p class="text-cream/40 text-sm leading-relaxed" data-i18n="pil1-desc">Each batch is made in small quantities — so every product that reaches you is fresh, intentional, and made with care.</p>
+      </div>
+      <div class="border border-cream/10 p-10 text-center hover:border-cocoa-400/40 transition duration-300" data-aos="fade-up" data-aos-delay="100">
+        <h3 class="font-serif text-cream text-xl mb-3" data-i18n="pil2-title">Natural Processing</h3>
+        <p class="text-cream/40 text-sm leading-relaxed" data-i18n="pil2-desc">We don't add what doesn't belong. Every ingredient comes from our farm, nothing more.</p>
+      </div>
+      <div class="border border-cream/10 p-10 text-center hover:border-cocoa-400/40 transition duration-300" data-aos="fade-up" data-aos-delay="200">
+        <h3 class="font-serif text-cream text-xl mb-3" data-i18n="pil3-title">Fully Traceable</h3>
+        <p class="text-cream/40 text-sm leading-relaxed" data-i18n="pil3-desc">From the tree it grew on, to the bar in your hands — you'll always know where it came from.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     §7 TESTIMONIALS — hidden until real reviews arrive
+     (uncomment this section when ready)
+═══════════════════════════════════════════════════════════ -->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     §8 VISIT OUR FARM
+═══════════════════════════════════════════════════════════ -->
+<section id="visit" class="py-24 md:py-36 bg-cocoa-900">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+
+      <!-- Info -->
+      <div data-aos="fade-right">
+        <span class="eyebrow" style="color:rgba(201,169,110,0.8);" data-i18n="vis-eyebrow">Come Visit</span>
+        <h2 class="font-serif text-4xl md:text-5xl text-cream font-light leading-tight mb-8" data-i18n="vis-h2">
+          Visit Our<br><em class="text-cocoa-300">Farm</em>
+        </h2>
+        <p class="text-cocoa-400 text-sm leading-relaxed mb-10" data-i18n="vis-sub">
+          Experience cocoa farming firsthand. Walk the plantation, witness the chocolate-making process,
+          and taste the difference that care and craft make — direct from the source.
+        </p>
+
+        <div class="space-y-8">
+          <!-- Hours -->
+          <div>
+            <h3 class="text-cream text-[0.65rem] tracking-[0.3em] uppercase pb-3 border-b border-cocoa-800 mb-4" data-i18n="vis-hours">Opening Hours</h3>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <span class="text-cocoa-500" data-i18n="vis-mf">Monday – Friday</span>
+                <span class="text-cream">09:00 – 17:00</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-cocoa-500" data-i18n="vis-ss">Saturday – Sunday</span>
+                <span class="text-cream">08:00 – 18:00</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-cocoa-500" data-i18n="vis-hol">Public Holidays</span>
+                <span class="text-cocoa-600" data-i18n="vis-closed">Closed</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-cream text-[0.65rem] tracking-[0.3em] uppercase pb-3 border-b border-cocoa-800 mb-4" data-i18n="vis-contact">Contact Us</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex gap-3">
+                <span class="text-cocoa-400 mt-0.5">📍</span>
+                <a href="https://maps.app.goo.gl/JbjSVUEiis63HUK5A" target="_blank" class="text-cream/70 hover:text-cream transition">ดูตำแหน่งฟาร์มบน Google Maps →</a>
+              </div>
+              <div class="flex gap-3 items-center">
+                <span class="text-cocoa-400">📞</span>
+                <a href="tel:0932536808" class="text-cream/70 hover:text-cream transition">093-253-6808</a>
+              </div>
+              <div class="flex gap-3 items-center">
+                <span class="text-cocoa-400">📧</span>
+                <a href="mailto:hello@roschatcocoa.com" class="text-cream/70 hover:text-cream transition">hello@roschatcocoa.com</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social -->
+          <div>
+            <h3 class="text-cream text-[0.65rem] tracking-[0.3em] uppercase pb-3 border-b border-cocoa-800 mb-4" data-i18n="vis-social">Follow Our Journey</h3>
+            <div class="flex flex-wrap gap-5">
+              <a href="https://www.facebook.com/share/1EU5DsLYPi/?mibextid=wwXIfr" target="_blank" class="flex items-center gap-2 text-cocoa-400 hover:text-cream transition text-sm">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Facebook
+              </a>
+              <a href="https://www.instagram.com/Roschat.cocoa" target="_blank" class="flex items-center gap-2 text-cocoa-400 hover:text-cream transition text-sm">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                @Roschat.cocoa
+              </a>
+              <a href="https://line.me/ti/p/~2536808" target="_blank" class="flex items-center gap-2 text-cocoa-400 hover:text-cream transition text-sm">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                </svg>
+                LINE ID: 2536808
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div data-aos="fade-left">
+        <div class="relative overflow-hidden" style="height:420px;">
+          <iframe
+            src="https://maps.google.com/maps?q=17.799639,100.383707&z=16&output=embed"
+            width="100%" height="100%"
+            style="border:0; filter:grayscale(25%) sepia(15%) contrast(0.9);"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="ROSCHAT COCOA Farm Location">
+          </iframe>
+        </div>
+        <div class="mt-5 p-7 border border-cocoa-700 bg-cocoa-800">
+          <h3 class="font-serif text-cream text-xl mb-2" data-i18n="vis-book-h">Book a Farm Tour</h3>
+          <p class="text-cocoa-400 text-sm mb-5 leading-relaxed" data-i18n="vis-book-sub">Reserve your spot for a guided farm-to-chocolate experience. Groups of all sizes welcome.</p>
+          <a href="#contact" class="btn-solid" data-i18n="vis-book-cta">Reserve Your Visit</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     §9 CONTACT
+═══════════════════════════════════════════════════════════ -->
+<section id="contact" class="py-24 md:py-36 bg-cocoa-50 dark:bg-cocoa-900">
+  <div class="max-w-3xl mx-auto px-6">
+
+    <div class="text-center mb-16" data-aos="fade-up">
+      <span class="eyebrow" data-i18n="cnt-eyebrow">Get In Touch</span>
+      <h2 class="font-serif text-4xl md:text-5xl text-cocoa-800 dark:text-cream font-light leading-tight" data-i18n="cnt-h2">
+        Let's Start a<br><em>Conversation</em>
+      </h2>
+      <div class="divider"></div>
+      <p class="text-cocoa-500 dark:text-cocoa-400 text-sm" data-i18n="cnt-sub">
+        Whether you're curious about our products, planning a visit, or interested in wholesale, we'd love to hear from you.
+      </p>
+    </div>
+
+    <form id="contactForm" class="space-y-10" novalidate data-aos="fade-up" data-aos-delay="150">
+      <div class="grid md:grid-cols-2 gap-10">
+        <div>
+          <label class="block text-[0.65rem] tracking-[0.25em] uppercase text-cocoa-400 mb-2" data-i18n="cnt-name">Name *</label>
+          <input type="text" name="name" required placeholder="Your full name" class="f-input" data-i18n-ph="cnt-name-ph">
+        </div>
+        <div>
+          <label class="block text-[0.65rem] tracking-[0.25em] uppercase text-cocoa-400 mb-2" data-i18n="cnt-email">Email *</label>
+          <input type="email" name="email" required placeholder="your@email.com" class="f-input" data-i18n-ph="cnt-email-ph">
+        </div>
+      </div>
+      <div>
+        <label class="block text-[0.65rem] tracking-[0.25em] uppercase text-cocoa-400 mb-2" data-i18n="cnt-phone">Phone</label>
+        <input type="tel" name="phone" placeholder="+66 xx xxx xxxx" class="f-input">
+      </div>
+      <div>
+        <label class="block text-[0.65rem] tracking-[0.25em] uppercase text-cocoa-400 mb-2" data-i18n="cnt-msg">Message *</label>
+        <textarea name="message" required rows="4" placeholder="Tell us what you're interested in…" class="f-input resize-none" data-i18n-ph="cnt-msg-ph"></textarea>
+      </div>
+      <div class="text-center pt-2">
+        <button type="submit" id="submitBtn" class="btn-solid min-w-[200px]" data-i18n="cnt-send">Send Message</button>
+        <p id="formMsg" class="mt-5 text-cocoa-500 dark:text-cocoa-300 text-sm hidden" data-i18n="cnt-ok">
+          ✓ Thank you! We'll be in touch within 24 hours.
+        </p>
+      </div>
+    </form>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     §10 FOOTER
+═══════════════════════════════════════════════════════════ -->
+<footer class="bg-cocoa-900 pt-16 pb-8 border-t border-cocoa-800">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <!-- Top grid -->
+    <div class="grid md:grid-cols-4 gap-10 pb-12 mb-8 border-b border-cocoa-800">
+
+      <div class="md:col-span-1">
+        <div class="font-serif text-2xl text-cream tracking-[0.15em] mb-4">
+          ROSCHAT<span class="text-cocoa-300">·</span>COCOA
+        </div>
+        <p class="text-cocoa-500 text-sm leading-relaxed mb-5" data-i18n="ft-desc">
+          Artisan craft cocoa grown and made with patience, passion, and purpose in Thapla, Uttaradit, Thailand.
+        </p>
+        <p class="text-cocoa-700 text-[0.65rem] tracking-[0.2em] uppercase" data-i18n="ft-since">Bean to Bar · Since 2021</p>
+      </div>
+
+      <div>
+        <h4 class="text-cream text-[0.65rem] tracking-[0.3em] uppercase mb-5">Navigate</h4>
+        <ul class="space-y-3">
+          <li><a href="#story"    class="text-cocoa-500 hover:text-cream text-sm transition">Our Story</a></li>
+          <li><a href="#farm"     class="text-cocoa-500 hover:text-cream text-sm transition">Farm Experience</a></li>
+          <li><a href="#process"  class="text-cocoa-500 hover:text-cream text-sm transition">The Process</a></li>
+          <li><a href="#products" class="text-cocoa-500 hover:text-cream text-sm transition">Products</a></li>
+          <li><a href="#visit"    class="text-cocoa-500 hover:text-cream text-sm transition">Visit Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-cream text-[0.65rem] tracking-[0.3em] uppercase mb-5">Products</h4>
+        <ul class="space-y-3">
+          <li><a href="#products" class="text-cocoa-500 hover:text-cream text-sm transition">Cocoa Beans</a></li>
+          <li><a href="#products" class="text-cocoa-500 hover:text-cream text-sm transition">Cocoa Nibs</a></li>
+          <li><a href="#products" class="text-cocoa-500 hover:text-cream text-sm transition">Craft Chocolate Bar</a></li>
+          <li><a href="#products" class="text-cocoa-500 hover:text-cream text-sm transition">Cocoa Mass</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-cream text-[0.65rem] tracking-[0.3em] uppercase mb-5">Follow Us</h4>
+        <div class="space-y-3">
+          <a href="https://www.facebook.com/share/1EU5DsLYPi/?mibextid=wwXIfr" target="_blank" class="flex items-center gap-3 text-cocoa-500 hover:text-cream transition text-sm">
+            <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            ROSCHAT COCOA
+          </a>
+          <a href="#" class="flex items-center gap-3 text-cocoa-500 hover:text-cream transition text-sm">
+            <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            @roschatcocoa
+          </a>
+          <a href="https://line.me/ti/p/~2536808" target="_blank" class="flex items-center gap-3 text-cocoa-500 hover:text-cream transition text-sm">
+            <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+            </svg>
+            LINE: 2536808
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+      <p class="text-cocoa-700" data-i18n="ft-copy">© 2025 ROSCHAT·COCOA. All rights reserved.</p>
+      <div class="flex gap-5">
+        <a href="#" class="text-cocoa-700 hover:text-cocoa-400 transition" data-i18n="ft-privacy">Privacy Policy</a>
+        <a href="#" class="text-cocoa-700 hover:text-cocoa-400 transition" data-i18n="ft-terms">Terms of Service</a>
+      </div>
+      <p class="text-cocoa-700 flex items-center gap-2" data-i18n="ft-made">
+        Crafted with <span class="text-cocoa-500">♥</span> in Thailand
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PRODUCT MODAL
+═══════════════════════════════════════════════════════════ -->
+<div id="productModal" class="fixed inset-0 z-[70] items-center justify-center p-4 md:p-8" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div id="modalOverlay" class="absolute inset-0 bg-cocoa-900/80" style="backdrop-filter:blur(6px);"></div>
+  <div class="relative z-10 w-full max-w-3xl bg-cocoa-50 dark:bg-cocoa-900 shadow-2xl overflow-hidden" style="animation:scaleIn 0.28s both; max-height:90vh;">
+    <button id="modalClose" aria-label="Close" class="absolute top-4 right-4 z-20 w-9 h-9 flex items-center justify-center text-cocoa-400 hover:text-cocoa-800 dark:hover:text-cream bg-white/80 dark:bg-cocoa-800/80 transition">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <div id="modalContent" class="md:flex overflow-y-auto" style="max-height:90vh;">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Back to top -->
+<button id="btt" aria-label="Back to top"
+  class="fixed bottom-7 right-7 z-40 w-11 h-11 bg-cocoa-600 text-cream flex items-center justify-center hover:bg-cocoa-500 transition text-lg shadow-lg">
+  ↑
+</button>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════════════ -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+// ── AOS ──────────────────────────────────────────────────────
+AOS.init({ duration: 750, once: true, easing: 'ease-out-cubic', offset: 70 });
+
+// ── THEME ─────────────────────────────────────────────────────
+const html = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+const iconSun  = document.getElementById('iconSun');
+const iconMoon = document.getElementById('iconMoon');
+
+function applyTheme(dark) {
+  html.classList.toggle('dark', dark);
+  iconSun.classList.toggle('hidden', !dark);
+  iconMoon.classList.toggle('hidden', dark);
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+}
+
+// Initial: system preference or saved
+const saved = localStorage.getItem('theme');
+const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+applyTheme(saved ? saved === 'dark' : systemDark);
+
+themeBtn.addEventListener('click', () => applyTheme(!html.classList.contains('dark')));
+
+// ── NAVBAR SCROLL ─────────────────────────────────────────────
+const navbar = document.getElementById('navbar');
+const btt    = document.getElementById('btt');
+
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  navbar.classList.toggle('scrolled', y > 60);
+  btt.classList.toggle('show', y > 500);
+}, { passive: true });
+
+btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ── MOBILE MENU ───────────────────────────────────────────────
+const mobileMenu    = document.getElementById('mobileMenu');
+const menuOverlay   = document.getElementById('menuOverlay');
+const menuBtn       = document.getElementById('menuBtn');
+const closeBtn      = document.getElementById('closeBtn');
+
+function openMenu()  { mobileMenu.classList.add('open');    menuOverlay.classList.remove('hidden'); document.body.style.overflow='hidden'; }
+function closeMenu() { mobileMenu.classList.remove('open'); menuOverlay.classList.add('hidden');    document.body.style.overflow=''; }
+
+menuBtn.addEventListener('click', openMenu);
+closeBtn.addEventListener('click', closeMenu);
+menuOverlay.addEventListener('click', closeMenu);
+document.querySelectorAll('.m-link').forEach(l => l.addEventListener('click', closeMenu));
+
+// ── HERO PARALLAX ─────────────────────────────────────────────
+const heroBg = document.getElementById('heroBg');
+window.addEventListener('scroll', () => {
+  if (!heroBg) return;
+  const s = window.scrollY;
+  if (s < window.innerHeight * 1.2) {
+    heroBg.style.transform = `scale(1.12) translateY(${s * 0.22}px)`;
+  }
+}, { passive: true });
+
+// ── TESTIMONIALS — removed (section hidden, re-add when real reviews arrive) ──
+
+// ── COUNTER ANIMATION ─────────────────────────────────────────
+function animCount(el, target, suffix = '+') {
+  let n = 0;
+  const step = target / 35;
+  const t = setInterval(() => {
+    n = Math.min(n + step, target);
+    el.textContent = Math.round(n) + suffix;
+    if (n >= target) clearInterval(t);
+  }, 40);
+}
+
+const statsObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = parseInt(el.dataset.target);
+    if (!isNaN(target)) animCount(el, target);
+    statsObs.unobserve(el);
+  });
+}, { threshold: 0.6 });
+
+document.querySelectorAll('.stat-num[data-target]').forEach(el => statsObs.observe(el));
+
+// ── PROCESS DRAG SCROLL ───────────────────────────────────────
+const procWrap = document.getElementById('procWrap');
+let pDown = false, pStartX = 0, pScrollLeft = 0;
+
+procWrap.addEventListener('mousedown', e => {
+  pDown = true; pStartX = e.pageX - procWrap.offsetLeft; pScrollLeft = procWrap.scrollLeft;
+  procWrap.style.userSelect = 'none';
+});
+procWrap.addEventListener('mouseleave', () => { pDown = false; });
+procWrap.addEventListener('mouseup',    () => { pDown = false; procWrap.style.userSelect = ''; });
+procWrap.addEventListener('mousemove', e => {
+  if (!pDown) return; e.preventDefault();
+  procWrap.scrollLeft = pScrollLeft - (e.pageX - procWrap.offsetLeft - pStartX) * 1.5;
+});
+
+// Touch passthrough is native — no override needed
+
+// ── CONTACT FORM ──────────────────────────────────────────────
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const msg = document.getElementById('formMsg');
+
+  const name    = this.querySelector('[name="name"]').value.trim();
+  const email   = this.querySelector('[name="email"]').value.trim();
+  const phone   = this.querySelector('[name="phone"]').value.trim();
+  const message = this.querySelector('[name="message"]').value.trim();
+
+  const subject = encodeURIComponent('ติดต่อจากเว็บไซต์ ROSCHAT·COCOA — ' + name);
+  const body    = encodeURIComponent(
+    'ชื่อ: ' + name + '\n' +
+    'Email: ' + email + '\n' +
+    'โทร: ' + (phone || '-') + '\n\n' +
+    'ข้อความ:\n' + message
+  );
+
+  window.location.href = 'mailto:apichat.nai@gmail.com?subject=' + subject + '&body=' + body;
+
+  btn.textContent = 'Opening email…';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    btn.textContent = 'Send Message';
+    btn.disabled = false;
+    msg.classList.remove('hidden');
+    this.reset();
+    setTimeout(() => msg.classList.add('hidden'), 6000);
+  }, 1200);
+});
+
+// ── LANGUAGE TOGGLE ──────────────────────────────────────────
+let currentLang = localStorage.getItem('lang') || 'en';
+
+const T = {
+  en: {
+    // Nav
+    'nav-story':'Our Story','nav-farm':'Farm','nav-process':'Process',
+    'nav-products':'Products','nav-visit':'Visit','nav-contact':'Contact',
+    // Mobile nav
+    'mob-story':'Our Story','mob-farm':'Farm Experience','mob-process':'The Process',
+    'mob-products':'Products','mob-visit':'Visit Us','mob-contact':'Contact',
+    // Hero
+    'hero-eyebrow':'Artisan Craft Cocoa · Farm to Chocolate',
+    'hero-h1':'From Tree<br><em class="text-cocoa-300" style="font-style:italic;">to Chocolate</em>',
+    'hero-sub':'Every cocoa bean carries years of care, patience, and craftsmanship.',
+    'hero-cta':'Explore Our Story','hero-scroll':'Scroll',
+    // Story
+    'story-eyebrow':'Our Journey',
+    'story-h2':'The Story Behind<br><em>Every Bean</em>',
+    'story-sub':'The journey from a cocoa tree to your chocolate takes years of quiet dedication. It is a labor of love that few truly understand — a process where patience is not a virtue but a necessity.',
+    's1-title':'Planting Cocoa Trees','s1-year':'Year 0',
+    's2-title':'Growing for Years','s2-year':'Years 1–4',
+    's3-title':'Harvesting Pods by Hand','s3-year':'Harvest Season',
+    's4-title':'Natural Fermentation','s4-year':'5–7 Days',
+    's5-title':'Sun Drying','s5-year':'10–14 Days',
+    's6-title':'Small-Batch Roasting','s6-year':'Small Batch',
+    's7-title':'Grinding','s7-year':'48–72 Hours',
+    's8-title':'Craft Chocolate','s8-year':'Handcrafted',
+    // Farm
+    'farm-eyebrow':'The Farm',
+    'farm-h2':'More Than a Cocoa Farm<br><em class="text-cocoa-300">This Is What We Believe</em>',
+    'farm-intro':'We believe great chocolate doesn\'t start in a factory.<br>It begins the day a cocoa tree bears its first fruit.<br>Every step after that is a decision that shapes the final taste.',
+    'g1-title':'Grown With Respect for Nature',
+    'g1-desc':'We let cocoa trees grow beneath the forest canopy, preserving nature\'s balance and the quality of every pod.',
+    'g2-title':'Harvested Only at Peak Ripeness',
+    'g2-desc':'Every pod is hand-picked, chosen only when it reaches its perfect moment.',
+    'g3-title':'Time Is the Key Ingredient',
+    'g3-desc':'We let nature build the flavor, never rushing the process.',
+    'g4-title':'Never Rushed',
+    'g4-desc':'Because we believe quality can\'t be sped up by quantity.',
+    'val1-title':'No Chemicals','val1-desc':'100% organic, zero pesticides or synthetic fertilizers',
+    'val2-title':'Water Conscious','val2-desc':'Rainwater harvesting and minimal water footprint',
+    'val3-title':'Shade Grown','val3-desc':'Under native forest canopy, preserving biodiversity',
+    'val4-title':'Trusted Origin','val4-desc':'Whether grown on our farm or sourced from trusted partner growers, every bean meets the same standard and stays fully traceable.',
+    // Process
+    'proc-eyebrow':'Craft &amp; Technique',
+    'proc-h2':'The Art of Making<br><em>Chocolate</em>',
+    'proc-hint':'← Drag or scroll to explore →',
+    'tag-key':'Key Step',
+    'p1-step':'Step 01','p1-title':'Growing','p1-desc':'3–5 years, grown in rich tropical soil',
+    'p2-step':'Step 02','p2-title':'Harvesting','p2-desc':'Only ripe pods, hand-cut one by one',
+    'p3-step':'Step 03','p3-title':'Fermenting','p3-desc':'5–7 days, in wooden boxes under banana leaves',
+    'p4-step':'Step 04','p4-title':'Drying','p4-desc':'10–14 days, sun-dried naturally on raised beds',
+    'p5-step':'Step 05','p5-title':'Roast the Beans','p5-desc':'Small batches, guided by scent and touch',
+    'p6-step':'Step 06','p6-title':'Grinding','p6-desc':'Stone-ground 48–72 hours to silky smoothness',
+    'p7-step':'Step 07','p7-title':'Chocolate','p7-desc':'Hand-tempered, molded, and wrapped',
+    // Products
+    'prod-eyebrow':'Our Collection',
+    'prod-h2':'Crafted with<br><em class="text-cocoa-500 dark:text-cocoa-300">Pure Intention</em>',
+    'prod-sub':'From raw single-origin beans to refined handmade chocolate — every product tells the full story of our farm.',
+    'c1-tag':'Single Origin','c1-name':'Raw Cocoa Beans',
+    'c1-desc':'Fermented &amp; sun-dried beans direct from our trees. Ideal for home roasters.',
+    'c2-badge':'Popular','c2-tag':'Roasted','c2-name':'Cocoa Nibs',
+    'c2-desc':'Crunchy roasted cocoa pieces rich in antioxidants — great for baking and smoothies.',
+    'c3-badge':'Signature','c3-tag':'Bean to Bar','c3-name':'Craft Chocolate Bar',
+    'c3-desc':'72% dark chocolate made entirely from our farm. Two ingredients, infinite craft.',
+    'c4-tag':'Pure Cocoa','c4-name':'Cocoa Mass',
+    'c4-desc':'Pure stone-ground cocoa liquor from our farm — no additives, 100% cacao.',
+    'inquire':'Inquire','order':'Order →',
+    // Why
+    'why-eyebrow':'Why Choose Us',
+    'why-h2':'Why ROSCHAT<br><em class="text-cocoa-300">Cocoa</em>',
+    'stat1-lbl':'Years<br>Growing','stat2-lbl':'Farm<br>Origin',
+    'stat3-lbl':'Ingredients<br>Only','stat4-lbl':'Additives<br>Added',
+    'pil1-title':'Small Batch Crafted',
+    'pil1-desc':'Each batch is made in small quantities — so every product that reaches you is fresh, intentional, and made with care.',
+    'pil2-title':'Natural Processing',
+    'pil2-desc':'We don\'t add what doesn\'t belong. Every ingredient comes from our farm, nothing more.',
+    'pil3-title':'Fully Traceable',
+    'pil3-desc':'From the tree it grew on, to the bar in your hands — you\'ll always know where it came from.',
+    // Visit
+    'vis-eyebrow':'Come Visit',
+    'vis-h2':'Visit Our<br><em class="text-cocoa-300">Farm</em>',
+    'vis-sub':'Experience cocoa farming firsthand. Walk the plantation, witness the chocolate-making process, and taste the difference that care and craft make — direct from the source.',
+    'vis-hours':'Opening Hours','vis-mf':'Monday – Friday','vis-ss':'Saturday – Sunday',
+    'vis-hol':'Public Holidays','vis-closed':'Closed',
+    'vis-contact':'Contact Us','vis-social':'Follow Our Journey',
+    'vis-book-h':'Book a Farm Tour',
+    'vis-book-sub':'Reserve your spot for a guided farm-to-chocolate experience. Groups of all sizes welcome.',
+    'vis-book-cta':'Reserve Your Visit',
+    // Contact
+    'cnt-eyebrow':'Get In Touch',
+    'cnt-h2':'Let\'s Start a<br><em>Conversation</em>',
+    'cnt-sub':'Whether you\'re curious about our products, planning a visit, or interested in wholesale, we\'d love to hear from you.',
+    'cnt-name':'Name *','cnt-email':'Email *','cnt-phone':'Phone','cnt-msg':'Message *',
+    'cnt-send':'Send Message',
+    'cnt-ok':'✓ Thank you! We\'ll be in touch within 24 hours.',
+    // Footer
+    'ft-desc':'Artisan craft cocoa grown and made with patience, passion, and purpose in Thapla, Uttaradit, Thailand.',
+    'ft-since':'Bean to Bar · Since 2021',
+    'ft-nav':'Navigate','ft-prod':'Products','ft-follow':'Follow Us',
+    'ft-copy':'© 2025 ROSCHAT·COCOA. All rights reserved.',
+    'ft-privacy':'Privacy Policy','ft-terms':'Terms of Service',
+    'ft-made':'Crafted with <span class="text-cocoa-500">♥</span> in Thailand',
+    'cnt-name-ph':'Your full name','cnt-email-ph':'your@email.com','cnt-msg-ph':'Tell us what you\'re interested in…',
+  },
+  th: {
+    'nav-story':'เรื่องราว','nav-farm':'ฟาร์ม','nav-process':'กระบวนการ',
+    'nav-products':'สินค้า','nav-visit':'มาเยี่ยม','nav-contact':'ติดต่อ',
+    'mob-story':'เรื่องราวของเรา','mob-farm':'ฟาร์มของเรา','mob-process':'กระบวนการผลิต',
+    'mob-products':'สินค้า','mob-visit':'มาเยี่ยมชม','mob-contact':'ติดต่อเรา',
+    'hero-eyebrow':'โกโก้คราฟต์อาร์ทิสัน · จากฟาร์มสู่ช็อกโกแลต',
+    'hero-h1':'จากต้นไม้<br><em class="text-cocoa-300" style="font-style:italic;">สู่ช็อกโกแลต</em>',
+    'hero-sub':'ทุกเมล็ดโกโก้คือหลายปีแห่งการดูแล ความอดทน และฝีมือที่ใส่ใจ',
+    'hero-cta':'สำรวจเรื่องราวของเรา','hero-scroll':'เลื่อนลง',
+    'story-eyebrow':'การเดินทางของเรา',
+    'story-h2':'เรื่องราวเบื้องหลัง<br><em>ทุกเมล็ด</em>',
+    'story-sub':'การเดินทางจากต้นโกโก้สู่ช็อกโกแลตในมือคุณ ต้องใช้เวลาหลายปีแห่งการทุ่มเทอย่างเงียบๆ เป็นงานแห่งความรักที่น้อยคนจะเข้าใจอย่างแท้จริง',
+    's1-title':'ปลูกต้นโกโก้','s1-year':'ปีที่ 0',
+    's2-title':'รอคอยอย่างอดทน','s2-year':'ปีที่ 1–4',
+    's3-title':'เก็บเกี่ยวด้วยมือ','s3-year':'ช่วงเก็บเกี่ยว',
+    's4-title':'การหมักตามธรรมชาติ','s4-year':'5–7 วัน',
+    's5-title':'ตากแดด','s5-year':'10–14 วัน',
+    's6-title':'คั่วในปริมาณน้อย','s6-year':'ทีละน้อย',
+    's7-title':'การบด','s7-year':'48–72 ชั่วโมง',
+    's8-title':'ช็อกโกแลตคราฟต์','s8-year':'ทำด้วยมือ',
+    'farm-eyebrow':'ฟาร์มของเรา',
+    'farm-h2':'มากกว่าฟาร์มโกโก้<br><em class="text-cocoa-300">นี่คือสิ่งที่เราเชื่อ</em>',
+    'farm-intro':'เราเชื่อว่าช็อกโกแลตที่ดี ไม่ได้เริ่มต้นจากโรงงาน<br>แต่มันเริ่มตั้งแต่วันที่ต้นโกโก้ออกผล<br>ทุกขั้นตอนหลังจากนั้น คือการตัดสินใจที่ส่งผลต่อรสชาติสุดท้าย',
+    'g1-title':'ปลูกอย่างเคารพธรรมชาติ',
+    'g1-desc':'เราเลือกให้ต้นโกโก้เติบโตใต้ร่มไม้ เพื่อรักษาสมดุลของธรรมชาติและคุณภาพของผลผลิต',
+    'g2-title':'เก็บเกี่ยวเฉพาะผลที่สมบูรณ์',
+    'g2-desc':'ทุกผลถูกเลือกด้วยมือ เมื่อถึงช่วงเวลาที่เหมาะสมที่สุดเท่านั้น',
+    'g3-title':'เวลา คือส่วนผสมสำคัญ',
+    'g3-desc':'เราปล่อยให้ธรรมชาติสร้างรสชาติ แทนการเร่งกระบวนการ',
+    'g4-title':'ไม่เร่งผลิต',
+    'g4-desc':'เพราะเราเชื่อว่าคุณภาพ ไม่สามารถเร่งได้ด้วยจำนวน',
+    'val1-title':'ไม่ใช้สารเคมี','val1-desc':'100% ออร์แกนิก ไม่มีสารกำจัดศัตรูพืชหรือปุ๋ยสังเคราะห์',
+    'val2-title':'ใส่ใจน้ำ','val2-desc':'เก็บน้ำฝนและลดการใช้น้ำให้น้อยที่สุด',
+    'val3-title':'ปลูกในร่มเงา','val3-desc':'ภายใต้เรือนยอดป่าธรรมชาติ รักษาความหลากหลายทางชีวภาพ',
+    'val4-title':'ต้นทางที่ไว้ใจได้','val4-desc':'ไม่ว่าจะปลูกเองหรือคัดสรรจากเครือข่ายเกษตรกรที่เราไว้วางใจ ทุกเมล็ดต้องผ่านมาตรฐานเดียวกัน และตรวจสอบย้อนกลับได้ทุกขั้นตอน',
+    'proc-eyebrow':'ฝีมือและเทคนิค',
+    'proc-h2':'ศิลปะการทำ<br><em>ช็อกโกแลต</em>',
+    'proc-hint':'← ลากหรือเลื่อนเพื่อดู →',
+    'tag-key':'ขั้นตอนสำคัญ',
+    'p1-step':'ขั้นที่ 01','p1-title':'ปลูกและดูแล','p1-desc':'3–5 ปี ปลูกในดินเขตร้อนอุดมสมบูรณ์',
+    'p2-step':'ขั้นที่ 02','p2-title':'เก็บเกี่ยว','p2-desc':'คัดเฉพาะผลสุก ตัดด้วยมือทีละผล',
+    'p3-step':'ขั้นที่ 03','p3-title':'หมัก','p3-desc':'5–7 วัน ในกล่องไม้ ปิดด้วยใบกล้วย',
+    'p4-step':'ขั้นที่ 04','p4-title':'ตากแดด','p4-desc':'10–14 วัน ตากธรรมชาติบนแปลงยกสูง',
+    'p5-step':'ขั้นที่ 05','p5-title':'คั่วเมล็ดโกโก้','p5-desc':'คั่วทีละน้อย ปรับด้วยกลิ่นและสัมผัส',
+    'p6-step':'ขั้นที่ 06','p6-title':'บด','p6-desc':'บดด้วยหิน 48–72 ชั่วโมง เนื้อเนียนละเอียด',
+    'p7-step':'ขั้นที่ 07','p7-title':'ช็อกโกแลต','p7-desc':'เทมเปอร์ เทพิมพ์ ห่อด้วยมือ',
+    'prod-eyebrow':'คอลเลกชันของเรา',
+    'prod-h2':'ผลิตด้วย<br><em class="text-cocoa-500 dark:text-cocoa-300">ความตั้งใจบริสุทธิ์</em>',
+    'prod-sub':'จากเมล็ดต้นกำเนิดเดียวสู่ช็อกโกแลตแฮนด์เมดที่ผลิตอย่างประณีต ทุกผลิตภัณฑ์บอกเล่าเรื่องราวทั้งหมดของฟาร์มเรา',
+    'c1-tag':'ต้นกำเนิดเดียว','c1-name':'เมล็ดโกโก้ดิบ',
+    'c1-desc':'หมักและตากแดดแล้ว นำส่งตรงจากต้นของเรา เหมาะสำหรับการคั่วเอง',
+    'c2-badge':'ยอดนิยม','c2-tag':'คั่วแล้ว','c2-name':'โกโก้นิบส์',
+    'c2-desc':'นิบส์โกโก้คั่วกรุบกรอบ อุดมสารต้านอนุมูลอิสระ เหมาะสำหรับอบขนมและสมูทตี้',
+    'c3-badge':'ซิกเนเจอร์','c3-tag':'บีนทูบาร์','c3-name':'ช็อกโกแลตบาร์คราฟต์',
+    'c3-desc':'ช็อกโกแลตดาร์ก 72% ผลิตจากฟาร์มของเรา สองส่วนผสม ฝีมือไม่สิ้นสุด',
+    'c4-tag':'โกโก้บริสุทธิ์','c4-name':'โกโก้มาส',
+    'c4-desc':'โกโก้ลิเคอร์บดด้วยหินบริสุทธิ์จากฟาร์มของเรา ไม่มีสารเติมแต่ง 100% โกโก้',
+    'inquire':'สอบถาม','order':'สั่งซื้อ →',
+    'why-eyebrow':'ทำไมต้องเลือกเรา',
+    'why-h2':'ทำไมต้อง<br><em class="text-cocoa-300">ROSCHAT</em>',
+    'stat1-lbl':'ปีที่<br>ปลูก','stat2-lbl':'ต้นทาง<br>จากฟาร์ม',
+    'stat3-lbl':'ส่วนผสม<br>เท่านั้น','stat4-lbl':'สาร<br>เติมแต่ง',
+    'pil1-title':'ผลิตทีละน้อย',
+    'pil1-desc':'แต่ละแบทช์ผลิตในปริมาณน้อย เพื่อให้ทุกผลิตภัณฑ์ที่ถึงมือคุณสด ตั้งใจ และผลิตด้วยความใส่ใจ',
+    'pil2-title':'กระบวนการธรรมชาติ',
+    'pil2-desc':'เราไม่เพิ่มสิ่งที่ไม่ควรอยู่ที่นี่ ส่วนผสมทุกอย่างมาจากฟาร์มของเรา ไม่มีอะไรมากกว่านี้',
+    'pil3-title':'ตรวจสอบย้อนกลับได้',
+    'pil3-desc':'จากต้นไม้ที่มันเติบโต สู่บาร์ในมือคุณ คุณจะรู้เสมอว่ามันมาจากไหน',
+    'vis-eyebrow':'มาเยี่ยมชม',
+    'vis-h2':'มาเยี่ยมชม<br><em class="text-cocoa-300">ฟาร์มของเรา</em>',
+    'vis-sub':'สัมผัสการทำฟาร์มโกโก้ด้วยตัวเอง เดินในไร่ ชมกระบวนการทำช็อกโกแลต และลิ้มรสความแตกต่างที่ความใส่ใจและฝีมือสร้างขึ้น',
+    'vis-hours':'เวลาเปิดทำการ','vis-mf':'จันทร์ – ศุกร์','vis-ss':'เสาร์ – อาทิตย์',
+    'vis-hol':'วันหยุดนักขัตฤกษ์','vis-closed':'ปิด',
+    'vis-contact':'ติดต่อเรา','vis-social':'ติดตามเรา',
+    'vis-book-h':'จองทัวร์ฟาร์ม',
+    'vis-book-sub':'จองที่นั่งสำหรับการท่องเที่ยวฟาร์มแบบมีไกด์นำ รับทุกขนาดกลุ่ม',
+    'vis-book-cta':'จองการเยี่ยมชม',
+    'cnt-eyebrow':'ติดต่อเรา',
+    'cnt-h2':'มาคุยกัน<br><em>ได้เลย</em>',
+    'cnt-sub':'ไม่ว่าจะสนใจสินค้า วางแผนมาเยี่ยม หรือสนใจสั่งซื้อจำนวนมาก เรายินดีฟังเสมอ',
+    'cnt-name':'ชื่อ *','cnt-email':'อีเมล *','cnt-phone':'เบอร์โทร','cnt-msg':'ข้อความ *',
+    'cnt-send':'ส่งข้อความ',
+    'cnt-ok':'✓ ขอบคุณ! เราจะติดต่อกลับภายใน 24 ชั่วโมง',
+    'ft-desc':'โกโก้คราฟต์อาร์ทิสัน ปลูกและผลิตด้วยความอดทน ความหลงใหล และจุดมุ่งหมาย ที่อำเภอท่าปลา จังหวัดอุตรดิตถ์ ประเทศไทย',
+    'ft-since':'บีนทูบาร์ · ตั้งแต่ปี 2564',
+    'ft-nav':'นำทาง','ft-prod':'สินค้า','ft-follow':'ติดตามเรา',
+    'ft-copy':'© 2025 ROSCHAT·COCOA. สงวนลิขสิทธิ์',
+    'ft-privacy':'นโยบายความเป็นส่วนตัว','ft-terms':'เงื่อนไขการใช้งาน',
+    'ft-made':'ผลิตด้วย <span class="text-cocoa-500">♥</span> ในประเทศไทย',
+    'cnt-name-ph':'ชื่อ-นามสกุล','cnt-email-ph':'อีเมลของคุณ','cnt-msg-ph':'บอกเราว่าคุณสนใจเรื่องอะไร…',
+  }
+};
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = T[lang][el.dataset.i18n];
+    if (v !== undefined) el.innerHTML = v;
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const v = T[lang][el.dataset.i18nPh];
+    if (v !== undefined) el.placeholder = v;
+  });
+  document.documentElement.lang = lang;
+  localStorage.setItem('lang', lang);
+  const btn = document.getElementById('langBtn');
+  if (btn) btn.textContent = lang === 'en' ? 'TH' : 'EN';
+}
+
+function toggleLang() { applyLang(currentLang === 'en' ? 'th' : 'en'); }
+
+// Init language
+applyLang(currentLang);
+
+// ── PRODUCT MODAL DATA ────────────────────────────────────────
+const products = {
+  beans: {
+    img: 'photo-Vdio/04_ตากเมล็ดที่หมักแล้ว.jpg',
+    tag:   { en:'Single Origin', th:'ต้นกำเนิดเดียว' },
+    name:  { en:'Raw Cocoa Beans', th:'เมล็ดโกโก้ดิบ' },
+    price: '฿200',
+    unit:  { en:'/ 100g', th:'/ 100 ก.' },
+    desc:  { en:'Fermented and sun-dried cocoa beans harvested by hand from our trees in Thapla, Uttaradit. Each bean is sorted individually to ensure only the finest reach you.',
+             th:'เมล็ดโกโก้หมักและตากแดดแล้ว เก็บเกี่ยวด้วยมือจากต้นของเราในอำเภอท่าปลา จังหวัดอุตรดิตถ์ คัดแยกทีละเมล็ดเพื่อให้มั่นใจว่าเฉพาะเมล็ดที่ดีที่สุดเท่านั้นที่ถึงมือคุณ' },
+    details: [
+      { lbl:{ en:'Origin', th:'แหล่งที่มา' },     val:{ en:'Thapla, Uttaradit, Thailand', th:'ท่าปลา อุตรดิตถ์ ประเทศไทย' } },
+      { lbl:{ en:'Process', th:'กระบวนการ' },     val:{ en:'Fermented 5–7 days · Sun-dried 10–14 days', th:'หมัก 5–7 วัน · ตากแดด 10–14 วัน' } },
+      { lbl:{ en:'Best For', th:'เหมาะสำหรับ' }, val:{ en:'Home roasters · Artisan chocolate makers', th:'คั่วเองที่บ้าน · ทำช็อกโกแลตอาร์ทิสัน' } },
+      { lbl:{ en:'Notes', th:'รสชาติ' },          val:{ en:'Earthy · Fruity · Natural acidity', th:'ดิน · ผลไม้ · ความเปรี้ยวธรรมชาติ' } },
+    ]
+  },
+  nibs: {
+    img: 'photo-Vdio/07_Cocoa Nibs.jpg',
+    tag:   { en:'Roasted', th:'คั่วแล้ว' },
+    name:  { en:'Cocoa Nibs', th:'โกโก้นิบส์' },
+    price: '฿260',
+    unit:  { en:'/ 100g', th:'/ 100 ก.' },
+    desc:  { en:'Roasted cocoa beans cracked into crunchy nibs. High in antioxidants, naturally bitter-sweet, and incredibly versatile for baking, smoothies, or snacking.',
+             th:'เมล็ดโกโก้คั่วบดเป็นนิบส์กรุบกรอบ อุดมสารต้านอนุมูลอิสระ รสขมหวานตามธรรมชาติ ใช้งานได้หลากหลายตั้งแต่อบขนมไปถึงทานเล่น' },
+    details: [
+      { lbl:{ en:'Origin', th:'แหล่งที่มา' },     val:{ en:'Thapla, Uttaradit, Thailand', th:'ท่าปลา อุตรดิตถ์ ประเทศไทย' } },
+      { lbl:{ en:'Process', th:'กระบวนการ' },     val:{ en:'Small-batch roasted · Cracked &amp; sorted', th:'คั่วทีละน้อย · บดและคัดแยก' } },
+      { lbl:{ en:'Best For', th:'เหมาะสำหรับ' }, val:{ en:'Baking · Smoothies · Granola · Snacking', th:'อบขนม · สมูทตี้ · กราโนล่า · ทานเล่น' } },
+      { lbl:{ en:'Notes', th:'รสชาติ' },          val:{ en:'Rich · Crunchy · Intense dark chocolate', th:'เข้มข้น · กรุบกรอบ · ช็อกโกแลตดาร์ก' } },
+    ]
+  },
+  bar: {
+    img: 'photo-Vdio/09_ช็อกโกแลต.jpg',
+    tag:   { en:'Bean to Bar · Signature', th:'บีนทูบาร์ · ซิกเนเจอร์' },
+    name:  { en:'Craft Chocolate Bar', th:'ช็อกโกแลตบาร์คราฟต์' },
+    price: '฿390',
+    unit:  { en:'/ 50g', th:'/ 50 ก.' },
+    desc:  { en:'Our signature 72% dark chocolate made entirely from our own beans with only two ingredients — cocoa mass and a touch of coconut sugar. Nothing more, nothing less.',
+             th:'ช็อกโกแลตดาร์ก 72% ซิกเนเจอร์ของเรา ผลิตจากเมล็ดของเราทั้งหมด ด้วยส่วนผสมเพียงสองชนิด — โกโก้มาสและน้ำตาลมะพร้าวเล็กน้อย ไม่มีอะไรเพิ่มเติม' },
+    details: [
+      { lbl:{ en:'Cacao', th:'โกโก้' },           val:{ en:'72% single origin', th:'72% ต้นกำเนิดเดียว' } },
+      { lbl:{ en:'Ingredients', th:'ส่วนผสม' },  val:{ en:'Cocoa mass · Coconut sugar', th:'โกโก้มาส · น้ำตาลมะพร้าว' } },
+      { lbl:{ en:'Process', th:'กระบวนการ' },     val:{ en:'Stone-ground 48–72 hrs · Hand-tempered', th:'บดด้วยหิน 48–72 ชม. · เทมเปอร์ด้วยมือ' } },
+      { lbl:{ en:'Notes', th:'รสชาติ' },          val:{ en:'Complex · Fruity undertones · Smooth finish', th:'ซับซ้อน · กลิ่นผลไม้ · จบเนียน' } },
+    ]
+  },
+  mass: {
+    img: 'photo-Vdio/10_Cocoa mass.jpg',
+    tag:   { en:'Pure Cocoa', th:'โกโก้บริสุทธิ์' },
+    name:  { en:'Cocoa Mass', th:'โกโก้มาส' },
+    price: '฿190',
+    unit:  { en:'/ 100g', th:'/ 100 ก.' },
+    desc:  { en:'Pure stone-ground cocoa liquor made entirely from our farm. 100% cacao with absolutely no additives — the purest form of chocolate before sugar enters the picture.',
+             th:'โกโก้ลิเคอร์บดด้วยหินบริสุทธิ์จากฟาร์มของเราทั้งหมด โกโก้ 100% ไม่มีสารเติมแต่งใดๆ — รูปแบบบริสุทธิ์ที่สุดก่อนที่น้ำตาลจะเข้ามา' },
+    details: [
+      { lbl:{ en:'Origin', th:'แหล่งที่มา' },     val:{ en:'Thapla, Uttaradit, Thailand', th:'ท่าปลา อุตรดิตถ์ ประเทศไทย' } },
+      { lbl:{ en:'Process', th:'กระบวนการ' },     val:{ en:'Stone-ground 48–72 hours', th:'บดด้วยหิน 48–72 ชั่วโมง' } },
+      { lbl:{ en:'Best For', th:'เหมาะสำหรับ' }, val:{ en:'Home baking · Cooking · DIY chocolate', th:'อบขนมที่บ้าน · ทำอาหาร · ทำช็อกโกแลตเอง' } },
+      { lbl:{ en:'Notes', th:'รสชาติ' },          val:{ en:'Intense · Pure cacao · Deep earthiness', th:'เข้มข้น · โกโก้บริสุทธิ์ · กลิ่นดินลึก' } },
+    ]
+  }
+};
+
+function openModal(key) {
+  const p = products[key];
+  const L = currentLang;
+  const ctaTxt = L === 'en' ? 'Inquire Now' : 'สอบถามเลย';
+  document.getElementById('modalContent').innerHTML = `
+    <div class="flex flex-col md:flex-row">
+      <div class="md:w-5/12 h-64 md:h-auto flex-shrink-0 overflow-hidden">
+        <img src="${p.img}" alt="${p.name[L]}" class="w-full h-full object-cover"
+             onerror="this.src='https://picsum.photos/600/800?random=99'">
+      </div>
+      <div class="flex-1 p-7 md:p-10 flex flex-col">
+        <span class="eyebrow text-left mb-2">${p.tag[L]}</span>
+        <h2 id="modalTitle" class="font-serif text-2xl md:text-3xl text-cocoa-800 dark:text-cream mb-1">${p.name[L]}</h2>
+        <p class="font-serif text-cocoa-500 dark:text-cocoa-300 text-2xl mb-5">${p.price} <span class="text-xs font-sans text-cocoa-400">${p.unit[L]}</span></p>
+        <p class="text-cocoa-500 dark:text-cocoa-400 text-sm leading-relaxed mb-6">${p.desc[L]}</p>
+        <div class="space-y-3 border-t border-cocoa-100 dark:border-cocoa-700 pt-5 mb-7">
+          ${p.details.map(d=>`
+            <div class="flex gap-4 text-sm">
+              <span class="text-cocoa-300 text-[0.6rem] tracking-[0.2em] uppercase w-24 flex-shrink-0 pt-0.5">${d.lbl[L]}</span>
+              <span class="text-cocoa-600 dark:text-cocoa-300">${d.val[L]}</span>
+            </div>`).join('')}
+        </div>
+        <a href="#contact" onclick="closeModal()" class="btn-solid text-center">${ctaTxt}</a>
+      </div>
+    </div>`;
+  const modal = document.getElementById('productModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('productModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalOverlay').addEventListener('click', closeModal);
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── SMOOTH ANCHOR SCROLL ──────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const offset = 80;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>

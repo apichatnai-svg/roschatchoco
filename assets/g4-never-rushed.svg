@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 900" width="700" height="900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a160d"/>
+      <stop offset="100%" stop-color="#170B06"/>
+    </linearGradient>
+    <radialGradient id="spot" cx="50%" cy="38%" r="45%">
+      <stop offset="0%" stop-color="#D4A96A" stop-opacity="0.30"/>
+      <stop offset="60%" stop-color="#D4A96A" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#D4A96A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="table" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3B2318"/>
+      <stop offset="100%" stop-color="#221208"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C9A177"/>
+      <stop offset="100%" stop-color="#A87D53"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EDE0CC"/>
+      <stop offset="100%" stop-color="#D9C6A3"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="700" height="900" fill="url(#bg)"/>
+  <rect width="700" height="900" fill="url(#spot)"/>
+
+  <!-- table -->
+  <rect x="0" y="560" width="700" height="340" fill="url(#table)"/>
+  <g stroke="#4A2A19" stroke-width="1.4" opacity="0.5">
+    <line x1="0" y1="610" x2="700" y2="605"/>
+    <line x1="0" y1="690" x2="700" y2="695"/>
+    <line x1="0" y1="775" x2="700" y2="780"/>
+  </g>
+
+  <!-- top ornament -->
+  <g transform="translate(350,80)" fill="none" stroke="#D4A96A" stroke-width="1.6" opacity="0.85">
+    <line x1="-90" y1="0" x2="-18" y2="0"/>
+    <line x1="18" y1="0" x2="90" y2="0"/>
+    <rect x="-8" y="-8" width="16" height="16" transform="rotate(45 0 0)"/>
+  </g>
+
+  <!-- small stack of already-wrapped bars, off to the side (small batch, only a few) -->
+  <g transform="translate(555,600)">
+    <rect x="-58" y="-8" width="116" height="34" rx="4" fill="#8B5E3C" opacity="0.9"/>
+    <rect x="-54" y="-40" width="108" height="34" rx="4" fill="#9C6A44" opacity="0.9"/>
+    <rect x="-50" y="-72" width="100" height="34" rx="4" fill="#AD764C" opacity="0.9"/>
+    <g stroke="#D4A96A" stroke-width="1.2" opacity="0.6">
+      <line x1="-50" y1="-55" x2="50" y2="-55"/>
+      <line x1="-54" y1="-23" x2="54" y2="-23"/>
+      <line x1="-58" y1="9" x2="58" y2="9"/>
+    </g>
+  </g>
+
+  <!-- wax paper laid flat on table, center -->
+  <rect x="215" y="565" width="270" height="185" rx="6" fill="url(#paper)" opacity="0.95" transform="rotate(-2 350 655)"/>
+  <g stroke="#8B5E3C" stroke-width="1" opacity="0.25" transform="rotate(-2 350 655)">
+    <line x1="235" y1="590" x2="465" y2="590"/>
+    <line x1="235" y1="620" x2="465" y2="620"/>
+    <line x1="235" y1="650" x2="465" y2="650"/>
+    <line x1="235" y1="680" x2="465" y2="680"/>
+    <line x1="235" y1="710" x2="465" y2="710"/>
+  </g>
+
+  <!-- chocolate bar being wrapped, center, in the spotlight -->
+  <g transform="rotate(-2 350 640)">
+    <rect x="270" y="575" width="160" height="130" rx="8" fill="#3B2314" stroke="#1C0F0A" stroke-width="2"/>
+    <g stroke="#1C0F0A" stroke-width="3.5" opacity="0.85">
+      <line x1="270" y1="620" x2="430" y2="620"/>
+      <line x1="270" y1="665" x2="430" y2="665"/>
+      <line x1="350" y1="575" x2="350" y2="705"/>
+    </g>
+    <!-- honey-gold sheen -->
+    <path d="M 285,585 L 310,585 L 292,650 L 275,650 Z" fill="#D4A96A" opacity="0.18"/>
+  </g>
+
+  <!-- paper fold flaps, mid-wrap (not fully closed yet) -->
+  <path d="M 260,600 C 250,590 245,640 260,700 C 268,715 275,712 272,698 C 262,650 262,615 260,600 Z"
+        fill="url(#paper)" opacity="0.96"/>
+  <path d="M 440,600 C 450,590 455,640 440,700 C 432,715 425,712 428,698 C 438,650 438,615 440,600 Z"
+        fill="url(#paper)" opacity="0.96"/>
+
+  <!-- thin twine tie, half-tied -->
+  <path d="M 300,700 C 320,730 380,730 400,700" fill="none" stroke="#8B5E3C" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- LEFT HAND reaching in, folding the paper -->
+  <g transform="translate(150,760)">
+    <!-- forearm -->
+    <path d="M -40,140 C -20,100 10,70 60,55 L 95,20 C 105,10 120,10 128,20 L 150,45
+             C 158,55 156,68 146,76 L 108,108 C 70,130 30,150 -10,175 Z"
+          fill="url(#skin)"/>
+    <!-- fingers folding paper -->
+    <ellipse cx="118" cy="8" rx="16" ry="26" transform="rotate(-30 118 8)" fill="url(#skin)"/>
+    <ellipse cx="140" cy="30" rx="14" ry="24" transform="rotate(-15 140 30)" fill="url(#skin)"/>
+    <ellipse cx="150" cy="55" rx="13" ry="22" transform="rotate(5 150 55)" fill="url(#skin)"/>
+    <!-- sleeve -->
+    <path d="M -40,140 C -70,160 -90,200 -110,250 L 0,300 C 20,250 10,190 -10,175 Z" fill="#6B3A2A" opacity="0.9"/>
+  </g>
+
+  <!-- RIGHT HAND reaching in, folding the paper -->
+  <g transform="translate(560,760) scale(-1,1)">
+    <path d="M -40,140 C -20,100 10,70 60,55 L 95,20 C 105,10 120,10 128,20 L 150,45
+             C 158,55 156,68 146,76 L 108,108 C 70,130 30,150 -10,175 Z"
+          fill="url(#skin)"/>
+    <ellipse cx="118" cy="8" rx="16" ry="26" transform="rotate(-30 118 8)" fill="url(#skin)"/>
+    <ellipse cx="140" cy="30" rx="14" ry="24" transform="rotate(-15 140 30)" fill="url(#skin)"/>
+    <ellipse cx="150" cy="55" rx="13" ry="22" transform="rotate(5 150 55)" fill="url(#skin)"/>
+    <path d="M -40,140 C -70,160 -90,200 -110,250 L 0,300 C 20,250 10,190 -10,175 Z" fill="#6B3A2A" opacity="0.9"/>
+  </g>
+
+  <!-- soft steam / warmth wisps above the bar -->
+  <g fill="none" stroke="#EDE0CC" stroke-width="3" stroke-linecap="round" opacity="0.28">
+    <path d="M 330,560 C 322,530 342,512 332,484 C 324,460 340,444 332,420"/>
+    <path d="M 368,558 C 378,532 358,514 368,486 C 378,462 362,444 370,420"/>
+  </g>
+
+  <!-- cacao nibs scattered near hands -->
+  <g fill="#6B3A2A">
+    <ellipse cx="200" cy="820" rx="9" ry="6" transform="rotate(20 200 820)"/>
+    <ellipse cx="222" cy="838" rx="8" ry="6" transform="rotate(-15 222 838)"/>
+    <ellipse cx="500" cy="822" rx="9" ry="6" transform="rotate(-20 500 822)"/>
+  </g>
+
+  <!-- bottom ornament -->
+  <g transform="translate(350,850)" fill="none" stroke="#8B5E3C" stroke-width="1.4" opacity="0.7">
+    <line x1="-60" y1="0" x2="-14" y2="0"/>
+    <line x1="14" y1="0" x2="60" y2="0"/>
+    <rect x="-6" y="-6" width="12" height="12" transform="rotate(45 0 0)"/>
+  </g>
+
+  <rect width="700" height="900" fill="#1C0F0A" opacity="0.1"/>
+</svg>
